@@ -18,9 +18,14 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nom',
+        'prenom',
         'email',
-        'password',
+        'telephone',
+        'statut',
+        'url_photo',
+        'role_id',
+        
     ];
 
     /**
@@ -45,4 +50,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //fonction pour récupérer un user
+    static public function getemail($email)
+        {
+            $user = User::where('email','=',$email)->first();
+            return $user ?? null;
+            
+        }
+
+    static public function gettoken($remember_token)
+        {
+            $user = User::where('remember_token','=',$remember_token)->first();
+            return $user ?? null;
+        }
+
 }

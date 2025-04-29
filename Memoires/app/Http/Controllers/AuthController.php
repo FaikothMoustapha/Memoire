@@ -25,9 +25,17 @@ class AuthController extends Controller
                 
                  return redirect('admin/dashboard');
              }
-             else if (Auth::user()->role_id == '2')
+            else if (Auth::user()->role_id == '2')
                  {
                      return redirect('responsable/dashboard');
+                 }
+            else if (Auth::user()->role_id == '3')
+                 {
+                     return redirect('directeur/dashboard');
+                 }
+            else if (Auth::user()->role_id == '4')
+                 {
+                     return redirect('chefProjet/dashboard');
                  }
         }
         
@@ -56,6 +64,14 @@ class AuthController extends Controller
                 {
                     return redirect('responsable/dashboard');
                 }
+                else if (Auth::user()->role_id == '3')
+                 {
+                     return redirect('directeur/dashboard');
+                 }
+                else if (Auth::user()->role_id == '4')
+                 {
+                     return redirect('chefProjet/dashboard');
+                 }
                
 
             // dd(Auth::user()->role_id);
@@ -88,7 +104,8 @@ class AuthController extends Controller
                     $user->remember_token = Str::random(30);
                     $user->save();
                     Mail::to($user->email)->send(new ForgotPasswordMail($user));
-                    return redirect()->back()->with('success', 'Un email de réinitialisation a été envoyé à votre adresse. Merci de suivre les instructions indiquées. '); 
+                    return redirect()->back()->with('success', 'Un email de réinitialisation
+                     a été envoyé à votre adresse. Merci de suivre les instructions indiquées. '); 
                 }
             else
                 {

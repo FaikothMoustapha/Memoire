@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-header"><h3>Default form</h3></div>
             <div class="card-body">
-                <form method="post" action="{{route('')}}" class="forms-sample">
+                <form method="post" action="{{route('add_activite')}}" class="forms-sample">
                     <div class="form-group">
                         <label for="">Libelle</label>
                         <input type="text" class="form-control" id="exampleInputUsername1"  name="libAct">

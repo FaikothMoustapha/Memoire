@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/add/user', function () {
 //     return view('admin.user.enregistrement');
 // });
+
 
 
 
@@ -54,5 +56,6 @@ Route::group(['middleware' => 'chefprojet'], function()
     });
 
 
-
+// ensemble des routes lier aux activitésqs
+Route::get('add/activite',[ActiviteController::class,'addactivite'])->name('add_activite');
 

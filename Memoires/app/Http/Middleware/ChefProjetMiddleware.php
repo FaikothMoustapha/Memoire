@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class ChefProjetMiddleware
@@ -15,6 +16,19 @@ class ChefProjetMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!empty(Auth::check()))
+        {
+         if(Auth::user()->role_id==4)
+         {
+            return $next($request); 
+         }
+         else
+         {
+           Auth::logout();
+           return redirect(url(''));
+         }
+        }
         return $next($request);
     }
 }
+

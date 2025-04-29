@@ -29,7 +29,7 @@
                             </a>
                             <a href="#" class="media">
                                 <span class="d-flex">
-                                    <img src="img/users/1.jpg" class="rounded-circle" alt="">
+                                    <img src="{{asset('assets/img/users/1.jpg')}}" class="rounded-circle" alt="">
                                 </span>
                                 <span class="media-body">
                                     <span class="heading-font-family media-heading">Steve Smith</span> 
@@ -52,7 +52,7 @@
                 
                
                 <div class="dropdown">
-                    <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="avatar" src="img/user.jpg" alt=""></a>
+                    <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="avatar" src="{{asset('assets/img/user.jpg')}}" alt=""></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
 
                         <a class="dropdown-item" href=""><i class=""></i> {{Auth::user()->nom}}, {{Auth::user()->prenom}}</a>

@@ -12,12 +12,19 @@ class DashboardController extends Controller
         if (Auth::user()->role_id == '1')
         {
             // dd('Admin');
-             return view('admin/dashboard');
+            return view('admin/dashboard');
         }
         else if (Auth::user()->role_id == '2') 
         {
             return view('responsable/dashboard');
         }
-        
+        else if (Auth::user()->role_id == '3') 
+        {
+            return view('directeur/dashboard');
+        }
+        else if (Auth::user()->role_id == '4') 
+        {
+            return view('chefProjet/dashboard');
+        }
     }
 }

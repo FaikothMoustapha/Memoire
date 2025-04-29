@@ -7,7 +7,7 @@
                 <div class="widget-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="state">
-                            <h6>Responsable</h6>
+                            <h6>Responsable de suivi</h6>
                             <h2>1,410</h2>
                         </div>
                         <div class="icon">

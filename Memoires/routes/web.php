@@ -1,8 +1,8 @@
 <?php
-
 use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ResponsableController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,13 +39,20 @@ Route::group(['middleware' => 'admin'], function()
     {
         Route::get('admin/dashboard',[DashboardController::class,'dashboard'])->name('admin_dashboard');
         Route::get('add/user',[UserController::class,'add'])->name('add_user');
-        Route::post('add/store',[UserController::class,'store'])->name('store_user');
+        Route::post('store/user',[UserController::class,'store'])->name('store_user');
         Route::get('list/user',[UserController::class,'list'])->name('list_user');
+        Route::get('edit/user/{id}',[UserController::class,'edit'])->name('edit_user');
+        Route::post('/update/user/{id}', [UserController::class, 'update'])->name('update_user');
+        Route::get('/show/user/{id}', [UserController::class, 'show'])->name('show_user');
+        Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('delete_user');
+       
     });
     
 Route::group(['middleware' => 'responsable'], function()
     {
         Route::get('responsable/dashboard',[DashboardController::class,'dashboard'])->name('responsable_dashboard');
+        Route::get('add/projet',[ResponsableController::class,'add'])->name('add_projet');
+
     });
 
 Route::group(['middleware' => 'directeur'], function()

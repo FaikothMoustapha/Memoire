@@ -7,11 +7,9 @@
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
-
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
-        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
         <link rel="stylesheet" href="{{asset('assets/node_modules/bootstrap/dist/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/node_modules/@fortawesome/fontawesome-free/css/all.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/node_modules/icon-kit/dist/css/iconkit.min.css')}}">
@@ -26,8 +24,14 @@
         <link rel="stylesheet" href="{{asset('assets/node_modules/owl.carousel/dist/assets/owl.carousel.css')}}">
         <link rel="stylesheet" href="{{asset('assets/node_modules/owl.carousel/dist/assets/owl.theme.default.css')}}">
         <link rel="stylesheet" href="{{asset('assets/dist/css/theme.min.css')}}">
-        <script src="{{asset('assets/src/js/vendor/modernizr-2.8.3.min.js')}}"></script>
-    </head>
+
+<!-- Include Choices CSS -->
+<link
+  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
+
+<!-- Include Choices JavaScript (latest) -->
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+</head>
     
     <body>
         <!--[if lt IE 8]>
@@ -219,15 +223,15 @@
         <script src="{{asset('assets/js/widgets.js')}}"></script>
         <script src="{{asset('assets/js/charts.js')}}"></script>
         <script src="{{asset('assets/dist/js/theme.min.js')}}"></script>
-       
+        <script src="{{asset('assets/src/js/vendor/modernizr-2.8.3.min.js')}}"></script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
+        <!-- <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
             function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
             e=o.createElement(i);r=o.getElementsByTagName(i)[0];
             e.src='https://www.google-analytics.com/analytics.js';
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-        </script>
-    </body>
+        </script> -->
+       </body>
 </html>

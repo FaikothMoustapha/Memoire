@@ -1,14 +1,14 @@
-{{-- @extends('layouts.master')
+@extends('layouts.master')
 @section('content')
     <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         
         <div  class="card-header" style="display: flex ">
             <div class="section-block" id="basicform">
-                <h3 class="section-title" style="font-family: algerian">Enregistrement d'un stagiaire</h3>
-                <p>Veuillez entrez vos information pour qu'on puisse vous enrégistrer.</p>
+                <h3 class="section-title" style="font-family: algerian">Modification dun utilisateur </h3>
+                <p>Veuillez modifier vos information pour qu'on puisse vous enrégistrer.</p>
             </div>
-            <a href="{{route('list_stagiaire')}}"><button type="submit" class="btn btn-space   btn-secondary  " >Retour à la list des stagiaires</button></a>
+            <a href="{{route('list_user')}}"><button type="submit" class="btn btn-space   btn-secondary  " >Retour à la list des Utilisateur</button></a>
         </div>
         <div >
             @if (session('success'))
@@ -26,119 +26,61 @@
             
             <div class="card-body">
                
-                <form method="post" action="{{route('', $stagiaires->id)}}">
+                <form method="post" action="{{route('update_user', $users->id)}}">
                     @csrf
-                <div style="display: flex">
-                    <div   class="form-group col-lg-6  " >
-                        <label for="inputText3" class="col-form-label">Nom</label>
-                        <input id="inputText3" type="nom" class="form-control" name="nomStag" value="{{$stagiaires->nomStag}}" required >
-                        <div style="color: red">{{$errors->first('nomStag')}}</div>
+                        <div class="form-group col-lg-12">
+                            <label for="">Nom</label>
+                            <input type="text" class="form-control"  name="nom" value="{{$users->nom}}" required>
+                            <div style="color: red">{{$errors->first('nom')}}</div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label >Prenom</label>
+                            <input type="text" class="form-control"  name="prenom" value="{{$users->prenom}}" required>
+                            <div style="color: red">{{$errors->first('prenom')}}</div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label >Email</label>
+                            <input type="email" class="form-control"  name="email" placeholder="example@gmail.com" value="{{$users->email}}" required>
+                            <div style="color: red">{{$errors->first('email')}}</div>
+                        </div>
+                        <div style="display: flex">
+                            <div class="form-group col-lg-6">
+                                <label >Telephone</label>
+                                <input type="number" class="form-control"  name="telephone" placeholder="Nombre" value="{{$users->telephone}}">
+                                <div style="color: red">{{$errors->first('telephone')}}</div>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label >Mot de passe</label>
+                                <input type="password" class="form-control"  name="password" value="{{$users->password}}" required>
+                                <div style="color: red">{{$errors->first('password')}}</div>
+                            </div>
+                        </div>
+                        <div style="display: flex">
+                            <div class="form-group col-lg-6">
+                                <label >Statut</label>
+                                
+                                <select  class="form-control" name="statut" id="" required>
+                                    <option value="{{$users->statut}}" >Actif</option>
+                                    <option value="{{$users->statut}}" >Inactif</option>
+                                </select>
+                                
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label for="input-select">Role</label>
+                                <div style="display: flex">
+                                <select class="form-control" id="input-select" name="role_id" required>
+                                        @foreach ($roles as $role)
+                                   
+                                        <option value="{{$role->id}}" {{$users->role_id == $role->id ? 'selected':''}}>{{$role->libRole}} </option>
+                                    
+                                    @endforeach
+                                   
+                                </select> 
+                            </div>
+                        </div>
+                    <div >
+                        <button type="submit" class="btn btn-primary  " >Enregistrer</button>
                     </div>
-                    <div   class="form-group col-lg-6  " >
-                        <label for="inputText3" class="col-form-label">Prénom</label>
-                        <input id="inputText3" type="prenom" class="form-control" name="prenStag" value="{{$stagiaires->prenStag}}" required>
-                        <div style="color: red">{{$errors->first('prenStag')}}</div>
-                    </div>
-                </div>
-                <div style="display: flex">
-                    <div class="form-group col-lg-6">
-                        <label for="inputText3" class="col-form-label">Date de naissance</label>
-                        <input id="inputText3" type="date" class="form-control" placeholder="Numbers" name="datNais" value="{{$stagiaires->datNais}}" >
-                    </div>
-
-                    
-                    <div class="form-group col-lg-6">
-                        <label for="input-select">Genre</label>
-                        <select class="form-control" id="input-select" name="genre" value="{{$stagiaires->genre}}" >
-                            <option>Masculin</option>
-                            <option>Feminin</option>
-                            <option>Autre</option>
-                        </select>
-                    </div>
-                </div>
-                <div style="display: flex">
-
-                    <div class="form-group col-lg-6">
-                        <label for="inputEmail"  class="col-form-label" >Email </label>
-                        <input id="inputEmail" type="email" placeholder="name@example.com" class="form-control" name="email" value="{{$stagiaires->email}}" required>
-                        <div style="color: red">{{$errors->first('email')}}</div>
-                    </div>
-                    
-                       
-                    <div class="form-group col-lg-6">
-                        <label for="inputText4" class="col-form-label">Télephone</label>
-                        <input id="inputText4" type="number" class="form-control" placeholder="Numbers" name="tel" value="{{$stagiaires->tel}}" required>
-                        <div style="color: red">{{$errors->first('datDebut')}}</div>
-                    </div>
-                </div>
-            <div style="display: flex">
-                <div class="form-group col-lg-6">
-                    <label for="inputText4" class="col-form-label">Date de début de stage</label>
-                    <input id="inputText4" type="date" class="form-control" placeholder="Numbers" name="datDebut" value="{{$stagiaires->datDebut->format('d m Y')}}" required>
-                    <div style="color: red">{{$errors->first('datDebut')}}</div>
-                </div>
-
-                
-                
-                
-                <div class="form-group col-lg-6">
-                    <label for="inputText4" class="col-form-label">Date de fin de stage</label>
-                    <input id="inputText4" type="date" class="form-control"  name="datFin" value="{{$stagiaires->datFin}}" required>
-                    <div style="color: red">{{$errors->first('datFin')}}</div>
-                </div>
-            </div>
-                  
-            <div style="display: flex">
-                <div class="form-group col-lg-4">
-                    <label for="input-select">Ecole</label>
-                    <select class="form-control" id="input-select" name="idEcole"  >
-                        @foreach ($ecoles as $ecole)
-                   
-                        <option value="{{$ecole->id}}" {{$stagiaires->ecole_id == $ecole->id ? 'selected':''}}>{{$ecole->nomEcole}} </option>
-                    
-                    @endforeach
-                    </select>
-                
-                </div>
-                <div class="form-group col-lg-4">
-                    <label for="input-select">Filière</label>
-                    <select class="form-control" id="input-select" name="idFil" >
-                    @foreach ($filieres as $filiere)
-                   
-                        <option value="{{$filiere->id}}" {{$stagiaires->filiere_id == $filiere->id ? 'selected':''}}>{{$filiere->libelle}}</option>
-                    
-                    @endforeach
-                </select> 
-                </div>
-                <div class="form-group col-lg-4">
-                    <label for="input-select">Type</label>
-                    <select class="form-control" id="input-select" name="idTypStag" >
-                    @foreach ($type_stages as $type)
-                   
-                        <option value="{{$type->id}}" {{$stagiaires->type_stage_id == $type->id ? 'selected':''}}>{{$type->libelle}}</option>
-                    
-                    @endforeach
-                </select> 
-                </div>
-            </div>
-                <div class="form-group">
-                    <label for="inputText3" class="col-form-label">Theme</label>
-                    <textarea required="" class="form-control" name="theme" >{{$stagiaires->theme}}</textarea>
-                    <div style="color: red">{{$errors->first('theme')}}</div>
-                </div>  
-                <div class="form-group">
-                    <label for="inputText3" class="col-form-label">Address</label>
-                    <textarea required="" class="form-control" name="adrStag"  >{{$stagiaires->adrStag}}</textarea>
-                    <div style="color: red">{{$errors->first('adrStag')}}</div>
-
-                </div>  
-                    <div class="col-sm-6 pl-0">
-                        
-                            <button type="submit" class="btn btn-space btn-primary" required>Enregistrer</button>
-                            
-                        </p>
-                    </div>
-                
                 </form>
             </div>
           
@@ -146,4 +88,4 @@
     </div>
 </div>
 
-@endsection --}}
+@endsection

@@ -18,7 +18,7 @@ class ChefProjetMiddleware
     {
         if (!empty(Auth::check()))
         {
-         if(Auth::user()->role_id==4)
+         if(Auth::user()->role->libRole == "ChefProjet")
          {
             return $next($request); 
          }

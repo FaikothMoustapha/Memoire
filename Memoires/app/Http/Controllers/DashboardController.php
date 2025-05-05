@@ -9,20 +9,20 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        if (Auth::user()->role_id == '1')
+        if (Auth::user()->role->libRole == "Administrateur")
         {
             // dd('Admin');
             return view('admin/dashboard');
         }
-        else if (Auth::user()->role_id == '2') 
+        else if (Auth::user()->role->libRole == 'Responsable') 
         {
             return view('responsable/dashboard');
         }
-        else if (Auth::user()->role_id == '3') 
+        else if (Auth::user()->role->libRole == 'Directeur') 
         {
             return view('directeur/dashboard');
         }
-        else if (Auth::user()->role_id == '4') 
+        else if (Auth::user()->role->libRole == 'ChefProjet') 
         {
             return view('chefProjet/dashboard');
         }

@@ -18,22 +18,22 @@ class AuthController extends Controller
     public function login()
     {
         if (!empty(Auth::check())) {
-            if (Auth::user()->role_id == '1')
+            if (Auth::user()->role->libRole == "Administrateur")
              {
                    
-                 // dd('Admin');
+                //   dd('Administrateur');
                 
                  return redirect('admin/dashboard');
              }
-            else if (Auth::user()->role_id == '2')
+            else if (Auth::user()->role->libRole == "Responsable")
                  {
                      return redirect('responsable/dashboard');
                  }
-            else if (Auth::user()->role_id == '3')
+            else if (Auth::user()->role->libRole == "Directeur")
                  {
                      return redirect('directeur/dashboard');
                  }
-            else if (Auth::user()->role_id == '4')
+            else if (Auth::user()->role->libRole == "ChefProjet")
                  {
                      return redirect('chefProjet/dashboard');
                  }
@@ -53,22 +53,22 @@ class AuthController extends Controller
         $remember = !empty($request->item_checkbox)? true:false;
         if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password],$remember ))
             {
-                if (Auth::user()->role_id == '1')
+                if (Auth::user()->role->libRole == "Administrateur")
                 {
                     
                     // dd('Admin');
                 
                     return redirect('admin/dashboard');
                 }
-                else if (Auth::user()->role_id == '2')
+                else if (Auth::user()->role->libRole == "Responsable")
                 {
                     return redirect('responsable/dashboard');
                 }
-                else if (Auth::user()->role_id == '3')
+                else if (Auth::user()->role->libRole == "Directeur")
                  {
                      return redirect('directeur/dashboard');
                  }
-                else if (Auth::user()->role_id == '4')
+                else if (Auth::user()->role->libRole == "ChefProjet")
                  {
                      return redirect('chefProjet/dashboard');
                  }

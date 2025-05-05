@@ -13,15 +13,15 @@
     <div class="sidebar-content">
         <div class="nav-container">
             {{-- Début dashboard de l'administrateur --}}
-            @switch(auth()->user()->role_id)
-            @case(1)
+            @switch(auth()->user()->role->libRole)
+            @case("Administrateur")
                 <nav id="main-menu-navigation" class="navigation-main">
                 <div class="nav-lavel">administrateur</div>
                 <div class="nav-item active">
                     <a href="index.html"><i class="ik ik-bar-chart-2"></i><span>Tableau de bord</span></a>
                 </div> 
                 <div class="nav-item has-sub">
-                    <a href="#"><i class="ik ik-pie-chart"></i><span>Gestion des utilisateurs</span> </a>
+                    <a href="{{route('list_user')}}"><i class="ik ik-pie-chart"></i><span>Gestion des utilisateurs</span> </a>
                     <div class="submenu-content">
                         <a href="pages/charts-chartist.html" class="menu-item active">Listes des utilisateurs</a>
                         
@@ -47,7 +47,7 @@
 
         {{-- Début dashboard du responsable --}}
         
-            @case(2)
+            @case("Responsable")
                 <nav id="main-menu-navigation" class="navigation-main">
                     <div class="nav-lavel">Responsable </div>
                     <div class="nav-item active">
@@ -71,7 +71,7 @@
 
             {{-- Début dashboard du directeur --}}
             
-                @case(3)
+                @case("Directeur")
                     <nav id="main-menu-navigation" class="navigation-main">
                         <div class="nav-lavel">DSI</div>
                         <div class="nav-item active">
@@ -99,7 +99,7 @@
             
             {{-- Début dashboard du chef de projet --}}
             
-            @case(4)
+            @case("ChefProjet")
             <nav id="main-menu-navigation" class="navigation-main">
                 <div class="nav-lavel">Chef de projets</div>
                 <div class="nav-item active">

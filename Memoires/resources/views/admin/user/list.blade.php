@@ -9,7 +9,7 @@
             </div>
             <div  class="card-header" style="display: flex ">
                 <h5 class=" col-lg-11">Basic Table</h5>
-                <a href="{{route('add_stagiaire')}}"><button type="submit" class="btn btn-space   btn-secondary  " >Ajouter</button></a>
+                <a href="{{route('add_user')}}"><button type="submit" class="btn btn-space   btn-secondary  " >Ajouter</button></a>
             </div>
             <div >
                 @if (session('success'))
@@ -43,15 +43,15 @@
                           
                         <tr>
                             <td>{{$user->nom}}</td>
-                            <td>{{$user->prenStag}}</td>
+                            <td>{{$user->prenom}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->telephone}}</td>
                             <td>{{$user->statut}}</td>
                             <td>{{$user->role->libRole}}</td>
-                            <td><a href="{{route('show_activite', $activite->id)}}"><button type="submit" class="btn btn-space btn-primary" ><i class="fas fa-eye"></i></button></a></td>
-                            <td ><a href="{{route('edit_activite', $activite->id)}}" ><button type="submit" class="btn btn-success  " ><i class="fas fa-edit"></i></button></a></td>
+                            <td><a href=""><button type="submit" class="btn btn-space btn-primary" ><i class="fas fa-eye"></i></button></a></td>
+                            <td ><a href="" ><button type="submit" class="btn btn-success  " ><i class="fas fa-edit"></i></button></a></td>
                             @method('DELETE')
-                            <td><a href="{{route('delete_activite', $activite->id)}}"><button type="submit" class="btn btn-space   btn-secondary" onclick="confirmDelete()" ><i class="fas fa-prescription-bottle"></i></button></a></td >
+                            <td><a href=""><button type="submit" class="btn btn-space   btn-secondary" onclick="confirmDelete()" ><i class="fas fa-prescription-bottle"></i></button></a></td >
                                 
                             
                         

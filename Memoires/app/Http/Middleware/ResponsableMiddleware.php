@@ -18,7 +18,7 @@ class ResponsableMiddleware
     {
         if (!empty(Auth::check()))
         {
-         if(Auth::user()->role_id==2)
+         if(Auth::user()->role->libRole == "Responsable")
          {
             return $next($request); 
          }

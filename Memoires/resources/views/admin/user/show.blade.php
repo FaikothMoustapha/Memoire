@@ -1,27 +1,18 @@
 @extends('layouts.master')
 @section('content')
     <div class="row">
-        <div class="container-fluid py-4">
-            <div class="card shadow-sm">
-                <div class="card-header d-flex justify-content-between align-items-center bg-light">
-                    <div>
-                        <h3 class="mb-0" style="font-family: 'Algerian', sans-serif;">Modification d'un utilisateur</h3>
-                        <small class="text-muted">Veuillez modifier vos informations pour qu'on puisse vous enrégistrer.</small>
-                    </div>
-                    <a href="{{ route('list_user') }}" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Retour à la liste des utilisateurs
-                    </a>
-                </div>
+        <div class="card-header bg-primary text-white rounded-top d-flex justify-content-between align-items-center">
+            <div>
+                <h3 class="section-title">Modification d'un utilisateur</h3>
+                <p>Veuillez modifier vos informations pour qu'on puisse vous enrégistrer.</p>
+            </div>
+                <a href="{{ route('list_user') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Retour à la liste des utilisateurs
+                </a>
+        </div>
         
-                @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-        
-                <div class="card-body">
-                    <form method="post" action="">
+        <div class="card-body">
+            <form method="post" action="">
                         @csrf
                         <div class="row g-3">
                             <div class="col-md-6">

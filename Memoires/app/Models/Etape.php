@@ -12,4 +12,6 @@ class Etape extends Model
         'categorie_id',
         
     ];
+    
+
 }

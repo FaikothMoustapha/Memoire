@@ -13,4 +13,8 @@ class Activite extends Model
         'statut',
         'etape_id',
     ];
+    public function etape()
+        {
+            return $this->belongsTo(Etape::class,'etape_id');
+        }
 }

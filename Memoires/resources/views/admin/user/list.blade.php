@@ -6,8 +6,8 @@
             <h5 class="mb-0">Liste des Utilisateurs</h5>
         </div>
             <div  class="card-header" style="display: flex ">
-                <h5 class=" col-lg-11">Basic Table</h5>
-                <a href="{{route('add_user')}}"><button type="submit" class="btn btn-space   btn-secondary  " >Ajouter</button></a>
+                <h5 class=" col-lg-11"></h5>
+                <a href="{{route('add_user')}}"><button type="submit" class="btn btn-primary rounded-2" >➕Ajouter</button></a>
             </div>
             <div >
                 @if (session('success'))
@@ -19,16 +19,16 @@
                   </div>
                 @endif
             </div>
-                <div class="card-body">
+                <div class="card-body p-0">
                     <div class="row mb-3 justify-content-center">
                         <div class="col-md-6">
-                            <input type="text" id="searchInput" class="form-control text-center" placeholder="Rechercher un utilisateur...">
+                            <input type="text" id="searchInput" class="form-control text-center" placeholder="🔍 Rechercher un utilisateur...">
                         </div>
                     </div>
                     
                             <div class="table-responsive">
-                                <table id="userTable" class="table table-hover table-bordered table-striped align-middle text-center">
-                                    <thead class="table-dark">
+                                <table id="userTable" class="table table-hover mb-0">
+                                    <thead class="table-primary">
                                         <tr>
                                             <th>NOM</th>
                                             <th>PRENOM</th>
@@ -39,7 +39,7 @@
                                             <th >ACTIONS</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody >
                                         @foreach ($users as $user)
                                             <tr>
                                                 <td>{{ $user->nom }}</td>

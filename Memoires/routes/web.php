@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChefProjetController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResponsableController;
 use App\Http\Controllers\UserController;
@@ -68,11 +69,12 @@ Route::group(['middleware' => 'directeur'], function()
 
 
 Route::group(['middleware' => 'chefprojet'], function()
-    {
+    { 
         Route::get('chefProjet/dashboard',[DashboardController::class,'dashboard'])->name('chefProjet_dashboard');
+        Route::get('add/activite',[ChefProjetController::class,'add'])->name('add_activite');
+        Route::get('list/activite',[ChefProjetController::class,'list'])->name('list_activite');
     });
 
 
-// ensemble des routes lier aux activitésqs
-Route::get('add/activite',[ActiviteController::class,'addactivite'])->name('add_activite');
+
 

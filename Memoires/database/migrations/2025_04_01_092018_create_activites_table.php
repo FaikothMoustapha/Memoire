@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('activites', function (Blueprint $table) {
             $table->id();
             $table->string('libAct');
-            $table->string('datePrev');
-            $table->string('dateFinAct');
+            $table->date('datePrev');
+            $table->date('dateFinAct');
             $table->string('statut');
             $table->foreignId('etape_id')->constrained('etapes');
             $table->timestamps();

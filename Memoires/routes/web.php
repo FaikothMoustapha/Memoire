@@ -52,6 +52,12 @@ Route::group(['middleware' => 'responsable'], function()
     {
         Route::get('responsable/dashboard',[DashboardController::class,'dashboard'])->name('responsable_dashboard');
         Route::get('add/projet',[ResponsableController::class,'add'])->name('add_projet');
+        Route::post('store/projet',[ResponsableController::class,'store'])->name('store_projet');
+        Route::get('list/projet',[ResponsableController::class,'list'])->name('list_projet');
+        Route::get('edit/projet/{id}',[ResponsableController::class,'edit'])->name('edit_projet');
+        Route::post('/update/projet/{id}', [ResponsableController::class, 'update'])->name('update_projet');
+        Route::get('/show/projet/{id}', [ResponsableController::class, 'show'])->name('show_projet');
+        Route::delete('/projet/delete/{id}', [ResponsableController::class, 'delete'])->name('delete_projet');
 
     });
 

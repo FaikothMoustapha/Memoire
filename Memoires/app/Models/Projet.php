@@ -24,4 +24,46 @@ class Projet extends Model
         'statuts_projet_id',
         'chef_projet_id',
     ];
+    public function categorie()
+        {
+            return $this->belongsTo(Categorie::class,'categorie_id');
+        }
+
+    public function prestataire()
+        {
+            return $this->belongsTo(Prestataire::class,'prestataire_id');
+        }
+
+    public function programme()
+        {
+            return $this->belongsTo(Programme::class,'programme_id');
+        }
+
+    public function structure()
+        {
+            return $this->belongsTo(Structure::class,'structure_initiatrice_id');
+        }
+
+    public function structures()
+        {
+            return $this->belongsTo(Structure::class,'structure_beneficiaire_id');
+        }
+
+    public function financement()
+        {
+            return $this->belongsTo(Financement::class,'financement_id');
+        }
+
+    public function statut()
+        {
+            return $this->belongsTo(StatutProjet::class,'statuts_projet_id');
+        }
+
+    public function chef_projet()
+        {
+            return $this->belongsTo(User::class,'chef_projet_id');
+        }
+
+
+
 }

@@ -5,58 +5,72 @@
     <div class="card shadow rounded-2">
         <div class="card-body p-5">
             <h2 class="mb-4 text-center text-primary">📝 Enregistrement d’un Projet</h2>
-
-            <form action="#" method="POST">
+            <div >
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{session('success')}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+            </div>
+                
+            <form action="{{route('store_projet')}}" method="POST">
                 @csrf 
-
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="code" class="form-label">Code du projet</label>
+                        <label  class="form-label">Code du projet</label>
                         <input type="text" class="form-control rounded-2" name="code" id="code" required>
+                        <div style="color: red">{{$errors->first('code')}}</div>
                     </div>
                     <div class="col-md-6">
                         <label for="libProj" class="form-label">Libellé</label>
                         <input type="text" class="form-control rounded-2" name="libProj" id="libProj" required>
+                        <div style="color: red">{{$errors->first('libProj')}}</div>
+
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="objectifs" class="form-label">Objectifs</label>
                     <textarea class="form-control rounded-2" name="objectifs" id="objectifs" rows="3" required></textarea>
+                    <div style="color: red">{{$errors->first('objectifs')}}</div>
+
                 </div>
 
                 <div class="mb-3">
                     <label for="resAttendu" class="form-label">Résultats attendus</label>
                     <textarea class="form-control rounded-2" name="resAttendu" id="resAttendu" rows="3" required></textarea>
+                    <div style="color: red">{{$errors->first('resAttendu')}}</div>
+
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label  class="form-label">Structure initiatrice</label>
                         
-                        <select class="form-select" name="structure_initiatrice_id" id="structure_initiatrice_id" multiple>
-                            <option value="1" selected>DPAF</option>
-                            <option value="2">DGEC</option>
-                            <option value="3">DGYGN</option>
-                            <option value="4">DIR</option>
+                        <select class="form-control rounded-2 choices-select" name="structure_initiatrice_id" id="structure_initiatrice_id" multiple >
+                            @foreach ($structures as $Structure)
+                                <option value="{{$Structure->id}}">{{$Structure->libStruc}}</option>                        
+                            @endforeach
                         </select>
                         
                     </div>
                     <div class="col-md-4">
                         <label for="structure_beneficiaire_id" class="form-label">Structure bénéficiaire</label>
-                        <select class="form-select" name="structure_beneficiaire_id" id="structure_beneficiaire_id" multiple>
-                            <option value="1">DPAF</option>
-                            <option value="2" selected>DGEC</option>
-                            <option value="3">DGYGN</option>
-                            <option value="4">DIR</option>
+                        <select class="form-control rounded-2 choices-select" name="structure_beneficiaire_id" id="structure_beneficiaire_id" multiple >
+                            @foreach ($structures as $Structure)
+                                <option value="{{$Structure->id}}">{{$Structure->libStruc}}</option>                        
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label for="financement_id" class="form-label">Source de financement</label>
-                        <select class="form-select" name="financement_id" id="financement_id" multiple>
-                            <option value="1" selected>Fonds national</option>
-                            <option value="2">Partenaire externe</option>
-                            <option value="3">Budget spécial</option>
+                        <select class="form-control rounded-2 choices-select" name="financement_id" id="financement_id" multiple >
+                            @foreach ($financements as $Financement)
+                                <option value="{{$Financement->id}}">{{$Financement->libFinancement}}</option>                        
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -64,17 +78,18 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="categorie_id" class="form-label">Catégorie</label>
-                        <select class="form-select" name="categorie_id" id="categorie_id" multiple>
-                            <option value="1" selected>Infrastructure</option>
-                            <option value="2">Énergie</option>
-                            <option value="3">Environnement</option>
+                        <select class="form-control rounded-2 choices-select" name="categorie_id" id="categorie_id"  >
+                            @foreach ($categories as $Categorie)
+                                <option value="{{$Categorie->id}}">{{$Categorie->libCat}}</option>                        
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-6">
                         <label for="prestataire_id" class="form-label">Prestataire</label>
-                        <select class="form-select" name="prestataire_id" id="prestataire_id" multiple>
-                            <option value="1" selected> Société A</option>
-                            <option value="2">Société B</option>
+                        <select class="form-control rounded-2 choices-select" name="prestataire_id" id="prestataire_id"  >
+                            @foreach ($prestataires as $Prestataire)
+                                <option value="{{$Prestataire->id}}">{{$Prestataire->nomStructure}}</option>                        
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -82,14 +97,15 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="programme_id" class="form-label">Programme</label>
-                        <select class="form-select" name="programme_id" id="programme_id" multiple >
-                            <option value="1" selected  >Programme 1</option>
-                            <option value="2">Programme 2</option>
+                        <select class="form-control rounded-2 choices-select" name="programme_id" id="choices-multiple-remote-fetch"  >
+                            @foreach ($programmes as $Programme)
+                                <option value="{{$Programme->id}}">{{$Programme->libProg}}</option>                        
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-6">
                         <label for="statuts_projet_id" class="form-label">Statut du projet</label>
-                        <select class="form-select" name="statuts_projet_id" id="statuts_projet_id" multiple>
+                        <select class="form-control rounded-2 choices-select" name="statuts_projet_id" id="statuts_projet_id"  >
                             <option value="1" selected>Nouveau</option>
                         </select>    
                     </div>
@@ -100,8 +116,8 @@
                     <input type="text" class="form-control" name="PTF" id="PTF">
                 </div>
 
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg rounded-pill">
+                <div class="mb-4 text-center text-primary">
+                    <button type="submit" class="btn btn-primary  rounded-2">
                         💾 Enregistrer le projet
                     </button>
                 </div>                 
@@ -112,11 +128,10 @@
 
 {{-- Script Choices.js --}}
 <script>
-    document.querySelectorAll('select').forEach(function(select) {
+    document.querySelectorAll('.choices-select').forEach(function(select) {
         new Choices(select, {
             placeholder: true,
             itemSelectText: '',
-            placeholder: true,
             placeholderValue: 'Faites un choix',
             noResultsText: 'Aucun résultat trouvé',
             noChoicesText: 'Aucun choix à sélectionner',
@@ -127,7 +142,8 @@
 
 
 
-<!-- <script>
+
+{{-- <script> 
     // Récupérer l'élément
     var selectElement = document.getElementById('choices-multiple-remote-fetch');
 
@@ -139,7 +155,7 @@
         noChoicesText: 'Aucun choix à sélectionner',
         itemSelectText: 'Appuyez pour sélectionner',
     });
-</script> -->
+</script>  --}}
 
 
 

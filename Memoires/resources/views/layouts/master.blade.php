@@ -32,6 +32,34 @@
 <!-- Include Choices JavaScript (latest) -->
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 </head>
+    {{-- style pour add_projet select multiple --}}
+    <style>
+        .choices__inner {
+            background-color: #fff !important;
+            border: 1px solid #ced4da !important;
+            border-radius: 0.375rem !important;
+            padding: 0.375rem 0.75rem !important;
+            min-height: 38px !important;
+            font-size: 1rem !important;
+            box-shadow: none !important;
+        }
+    
+        .choices__list--multiple .choices__item {
+            background-color: #0d6efd !important; /* Bleu Bootstrap */
+            color: #fff;
+            border-radius: 0.2rem;
+            padding: 0.25rem 0.5rem;
+            margin: 0.25rem 0.25rem 0 0;
+        }
+    
+        .is-focused .choices__inner,
+        .choices__inner:focus {
+            border-color: #86b7fe !important;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+        }
+    </style>
+    
     
     <body>
         <!--[if lt IE 8]>

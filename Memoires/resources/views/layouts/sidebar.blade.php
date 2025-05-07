@@ -51,13 +51,13 @@
                 <nav id="main-menu-navigation" class="navigation-main">
                     <div class="nav-lavel">Responsable </div>
                     <div class="nav-item active">
-                        <a href="{{route('add_projet')}}"><i class="ik ik-bar-chart-2"></i><span>Tableau de bord</span></a>
+                        <a href=""><i class="ik ik-bar-chart-2"></i><span>Tableau de bord</span></a>
                     </div> 
                     <div class="nav-item active">
-                        <a href="index.html"><i class="ik ik-bar-chart-2"></i><span>Création de projet</span></a>
+                        <a href="{{route('add_projet')}}"><i class="ik ik-bar-chart-2"></i><span>Création de projet</span></a>
                     </div>
                     <div class="nav-item active">
-                        <a href="index.html"><i class="ik ik-bar-chart-2"></i><span>Liste des projets créer </span></a>
+                        <a href="{{route('list_projet')}}"><i class="ik ik-bar-chart-2"></i><span>Liste des projets créer </span></a>
                     </div> 
                     <div class="nav-item active">
                         <a href="index.html"><i class="ik ik-bar-chart-2"></i><span>Mes projets</span></a>

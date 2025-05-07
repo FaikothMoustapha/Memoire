@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 05 mai 2025 à 09:36
+-- Généré le : mer. 07 mai 2025 à 19:31
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `activites` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `libAct` varchar(255) NOT NULL,
-  `datePrev` varchar(255) NOT NULL,
-  `dateFinAct` varchar(255) NOT NULL,
+  `datePrev` date DEFAULT NULL,
+  `dateFinAct` date DEFAULT NULL,
   `statut` varchar(255) NOT NULL,
   `etape_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -71,7 +71,6 @@ CREATE TABLE `cache_locks` (
 CREATE TABLE `categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `libCat` varchar(255) NOT NULL,
-  `desCat` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -100,7 +99,6 @@ CREATE TABLE `documents` (
 
 CREATE TABLE `etapes` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `description` text DEFAULT NULL,
   `libEtape` varchar(255) NOT NULL,
   `categorie_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -234,6 +232,13 @@ CREATE TABLE `prestataires` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Déchargement des données de la table `prestataires`
+--
+
+INSERT INTO `prestataires` (`id`, `code`, `nomStructure`, `nomResponsable`, `email`, `telephone`, `created_at`, `updated_at`) VALUES
+(1, 'da112', 'WXCVBN?./§§/.?NB', 'KJHGFDSDFGHJKLM', 'se@gmail.com', '1234567890234567890', '2025-05-07 15:45:03', '2025-05-07 15:45:03');
+
 -- --------------------------------------------------------
 
 --
@@ -260,8 +265,8 @@ CREATE TABLE `projets` (
   `libProj` varchar(255) NOT NULL,
   `objectifs` text NOT NULL,
   `resAttendu` text NOT NULL,
-  `dateDebut` date NOT NULL,
-  `dateFin` date NOT NULL,
+  `dateDebut` date DEFAULT NULL,
+  `dateFin` date DEFAULT NULL,
   `duree` int(11) NOT NULL,
   `categorie_id` bigint(20) UNSIGNED NOT NULL,
   `prestataire_id` bigint(20) UNSIGNED NOT NULL,
@@ -337,14 +342,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('AgppuA1aWToztUElXxas3ZXtkAZoAwnNmmU3ZnZh', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidTNaZmdvT1g1UEhtMGdKWnd2ZTBSMkNGUENGQ3RQRnFqdVhmMjdUSyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZGQvdXNlciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1746181610),
-('GQJGh01cbhFk8yp5nfaT72JME1D7DAEQxL2D0syJ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUEcxNklBSVFpR0NyRk5jSTlmZkxmbGY4RkNXRkJSUDNKWDZtOTl1VCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZGQvYWN0aXZpdGUiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1746188495),
-('LK0CK5AcyrrssyDEFIZK5oJGhv4OvTkuwfkQuwev', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiQktGZFd2RG5uZThXYkRaNWFYS3FSS2R5MFlneVJUWlIzQXZoYU1NTyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZGQvdXNlciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1746184264),
-('NiFqPMwxyOMzzi4GOhPwyEVWJgYXWemnEGkiZUND', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTVFwWG5pMjFPaVgzdHlFSzBQcHZLOXNLQ1ZRUnRlMmZENXlwZ2g3RSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9saXN0L3VzZXIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1746188840),
-('ohJIWbeip3eEswC5K1kHIR0lJ1JNGvkMptgtgbp6', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiOVFZNEt4czRhMzFhbjJFMkgwaElQMzdNT2NwTmpNbVRVWTJFWjRXMCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZGQvdXNlciI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1746188449),
-('s3lQAeo38bxJ0SvbtvQ1NhoRAhq2yCOwgDlk7E94', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWU5pajkxNkkyalBOaXRaS0NGNFZXQzY0TlJpVnB6bkRZR0F6dDRJTSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZGQvdXNlciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1746185304),
-('sxaT453Vqbbj0HaGIiLhrhYi81pjjlUBLa4fURCG', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYjFzY1BWUG9vODNnMW5BSTgxODRmSnZoMlBtbVpYNk1MRk52TENVNCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9saXN0L3VzZXIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1746188496),
-('TRrdglZZf5SfSiyg5vhBOzaTZPtKFkSJwblS3gxd', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQVpUMEt5a2Zac2NFOXZyd3NrUzJzT0NzUThTT24xWWhSejhiOThpYyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZGQvdXNlciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1746183143);
+('RYyy6LKCf7yyRIGkmZG1Gf4IG6jW4zBFGzuZSizj', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiT0c5NWJ5Tng1S0htb3h1RFo4Q2VsRWVQRmpUUDFnYTlqQ2kyNGxKTCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9saXN0L3ByZXN0YXRhaXJlcyI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1746638242);
 
 -- --------------------------------------------------------
 
@@ -415,11 +413,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nom`, `prenom`, `email`, `email_verified_at`, `telephone`, `password`, `is_delete`, `statut`, `url_photo`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'MOUSTAPHA', 'Faïkoth', 'faikoth@gmail.com', NULL, '43156302', '$2y$12$AT4qnAcMZMJD7IxC8Xn0Ne2T.Beis7y.seJr6rL8IN/yo2W5wQjX6', 0, 'Actif', NULL, 1, 'ggns5MoNqJuywrN6GdzMdwwabpdSF2hpUX7o9OGGjjjEOSjADDgcMaK1031t', NULL, '2025-04-03 16:59:28'),
-(2, 'joseph', 'SAGBO', 'jo@gmail.com', NULL, '877898765432', '$2y$12$AT4qnAcMZMJD7IxC8Xn0Ne2T.Beis7y.seJr6rL8IN/yo2W5wQjX6', 0, 'Actif', NULL, 2, 'zGjfl7tGT3A7uKAXpNGgIgfo9FVAMoTttK4ungaTKXBU67yXs8eCEmVmcoyz', NULL, NULL),
-(3, 'DIAO', 'Fadil', 'direct@gmail.com', NULL, '2345678987', '$2y$12$AT4qnAcMZMJD7IxC8Xn0Ne2T.Beis7y.seJr6rL8IN/yo2W5wQjX6', 0, 'Actif', NULL, 3, NULL, NULL, NULL),
-(4, 'MOSIP', 'Galib', 'chef@gmail.com', NULL, '123456787', '$2y$12$AT4qnAcMZMJD7IxC8Xn0Ne2T.Beis7y.seJr6rL8IN/yo2W5wQjX6', 0, 'Actif', NULL, 4, NULL, NULL, NULL),
-(6, 'DOS', 'BADA', 'se@gmail.com', NULL, '123456776555444', '$2y$12$U2JSdkBBfm.2fcXDYlmbOu7loIje8cxGFyacwGStTZaf2A.EDOrlK', 0, 'Actif', NULL, 3, NULL, '2025-05-02 10:51:59', '2025-05-02 10:51:59');
+(1, 'MOUSTAPHA', 'Faikoth', 'fa@gmail.com', NULL, '23456789987654323', '$2y$12$FT3GHitf92axzJNlIweX/eDU/.kNsgmUwu7d1gzTjnjNQ0.GZY7HW', 0, 'Actif', NULL, 1, NULL, NULL, NULL),
+(2, 'SAGBO', 'Joseph', 'jo@gmail.com', NULL, '345678987654567', '$2y$12$FT3GHitf92axzJNlIweX/eDU/.kNsgmUwu7d1gzTjnjNQ0.GZY7HW', 0, 'Actif', NULL, 3, NULL, NULL, NULL),
+(3, 'SONON', 'Sabin', 'sa@gmail.com', NULL, '345678765434567', '$2y$12$FT3GHitf92axzJNlIweX/eDU/.kNsgmUwu7d1gzTjnjNQ0.GZY7HW', 0, 'Actif', NULL, 2, NULL, NULL, NULL),
+(4, 'BOBO', 'Junior', 'chef@gmail.com', NULL, '2345678765434765', '$2y$12$FT3GHitf92axzJNlIweX/eDU/.kNsgmUwu7d1gzTjnjNQ0.GZY7HW', 0, 'Actif', NULL, 4, NULL, NULL, NULL);
 
 --
 -- Index pour les tables déchargées
@@ -640,7 +637,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT pour la table `prestataires`
 --
 ALTER TABLE `prestataires`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `programmes`
@@ -688,7 +685,7 @@ ALTER TABLE `typedocs`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées

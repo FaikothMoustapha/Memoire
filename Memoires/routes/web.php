@@ -3,8 +3,10 @@ use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChefProjetController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PrestataireController;
 use App\Http\Controllers\ResponsableController;
 use App\Http\Controllers\UserController;
+use App\Models\Prestataire;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -46,7 +48,10 @@ Route::group(['middleware' => 'admin'], function()
         Route::post('/update/user/{id}', [UserController::class, 'update'])->name('update_user');
         Route::get('/show/user/{id}', [UserController::class, 'show'])->name('show_user');
         Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('delete_user');
-       
+// Enregistrer un prestataire   
+        Route::get('add/prestataires',[PrestataireController::class,'add'])->name('add_prestataire');
+        Route::get('list/prestataires',[PrestataireController::class,'list'])->name('list_prestataire');
+        Route::post('store/prestataires',[PrestataireController::class,'store'])->name('store_prestataire');
     });
     
 Route::group(['middleware' => 'responsable'], function()

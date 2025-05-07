@@ -15,7 +15,7 @@
                         <input type="date" class="form-control"  name="datePrev">
                     </div>
                     <div class="form-group">
-                        <label for="">date de prevu pour la fin</label>
+                        <label for="">date prevu pour la fin</label>
                         <input type="date" class="form-control"  placeholder="Password" name="dateFinAct">
                     </div>
                     <div class="form-group">

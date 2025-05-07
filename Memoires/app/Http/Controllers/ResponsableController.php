@@ -33,7 +33,7 @@ class ResponsableController extends Controller
 
     public function store(Request $request)
         {
-             //dd($request->all());
+            //  dd($request->all());
             $request->validate([
                 'code' => 'required|string|min:3',
                 'libProj' => 'required|string|min:3',

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('dateReunion');
             $table->time('heure');
             $table->string('lieu');
-            $table->foreignId('projet_id')->constrained('projets');
+            $table->foreignId('projet_id')->constrained('projets')->onDelecte('set null');
             $table->timestamps();
         });
     }

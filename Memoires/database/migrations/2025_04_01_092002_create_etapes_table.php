@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('etapes', function (Blueprint $table) {
             $table->id();
-            $table->text('description')->nullable();
             $table->string('libEtape');
             $table->foreignId('categorie_id')->constrained('categories');
             $table->timestamps();

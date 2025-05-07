@@ -48,7 +48,7 @@ class AuthController extends Controller
     public function authlogin(Request $request)
     {
         // dd($request->all());
-        // dd(Hash::make('1234567'));
+        // dd(Hash::make('1111'));
 
         $remember = !empty($request->item_checkbox)? true:false;
         if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password],$remember ))

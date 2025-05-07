@@ -41,10 +41,10 @@
                                     <tbody >
                                         @foreach ($activites as $activite)
                                             <tr>
-                                                <td>{{$activite->nom}}</td>
-                                                <td>{{$activite->prenom}}</td>
-                                                <td>{{$activite->email}}</td>
-                                                <td>{{$activite->telephone}}</td>                                                
+                                                <td>{{$activite->libAct}}</td>
+                                                <td>{{$activite->datePrev}}</td>
+                                                <td>{{$activite->dateFinAct}}</td>
+                                                <td>{{$activite->statut}}</td>                                                
                                                 <td>{{$activite->etape->libEtape}}</td>
                                                 <td>
                                                     <div class="dropdown">
@@ -54,17 +54,17 @@
                                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                                                             <ul>
                                                                 <li>
-                                                                    <a class="dropdown-item d-flex align-items-center" href="{{route('show_user', $user->id)}}">
+                                                                    <a class="dropdown-item d-flex align-items-center" href="">
                                                                         <i class="fas fa-eye text-primary me-2"></i> Détails
                                                                     </a>
                                                                 </li>
                                                                 <li>
-                                                                    <a class="dropdown-item d-flex align-items-center" href="{{ route('edit_user', $user->id) }}">
+                                                                    <a class="dropdown-item d-flex align-items-center" href="">
                                                                         <i class="fas fa-edit text-success me-2"></i> Modifier
                                                                     </a>
                                                                 </li>
                                                                 <li>
-                                                                    <form action="{{ route('delete_user', $user->id) }}" method="POST" onsubmit="return confirmDelete();">
+                                                                    <form action="" method="POST" onsubmit="return confirmDelete();">
                                                                         @csrf
                                                                         @method('DELETE')
                                                                         <button type="submit" class="dropdown-item d-flex align-items-center text-danger">

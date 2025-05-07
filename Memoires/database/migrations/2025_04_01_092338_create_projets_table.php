@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('libProj');
             $table->text('objectifs');
             $table->text('resAttendu');
-            $table->date('dateDebut');
-            $table->date('dateFin');
+            $table->date('dateDebut')->nullable();
+            $table->date('dateFin')->nullable();
             $table->integer('duree');
             $table->foreignId('categorie_id')->constrained('categories');
             $table->foreignId('prestataire_id')->constrained('prestataires');

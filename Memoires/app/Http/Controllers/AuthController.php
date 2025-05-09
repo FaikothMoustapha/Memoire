@@ -46,43 +46,34 @@ class AuthController extends Controller
 
 
     public function authlogin(Request $request)
-    {
-        // dd($request->all());
-        // dd(Hash::make('1111'));
+{
+    $remember = !empty($request->item_checkbox) ? true : false;
 
-        $remember = !empty($request->item_checkbox)? true:false;
-        if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password],$remember ))
-            {
-                if (Auth::user()->role->libRole == "Administrateur")
-                {
-                    
-                    // dd('Admin');
-                
-                    return redirect('admin/dashboard');
-                }
-                else if (Auth::user()->role->libRole == "Responsable")
-                {
-                    return redirect('responsable/dashboard');
-                }
-                else if (Auth::user()->role->libRole == "Directeur")
-                 {
-                     return redirect('directeur/dashboard');
-                 }
-                else if (Auth::user()->role->libRole == "ChefProjet")
-                 {
-                     return redirect('chefProjet/dashboard');
-                 }
-               
+    // On tente de connecter l'utilisateur
+    if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+        
+        // Vérification du statut après l'authentification
+        if (Auth::user()->statut === 'Inactif') {
+            Auth::logout();  // On déconnecte l'utilisateur
+            return redirect()->back()->with('error', 'Votre compte est inactif.');
+        }
 
-            // dd(Auth::user()->role_id);
-                
-            }
-        else
-            {
-                return redirect()->back()->with('error', 'Addresse mail ou mot de passe invalide');
-            }
+        // Redirection selon le rôle
+        if (Auth::user()->role->libRole == "Administrateur") {
+            return redirect('admin/dashboard');
+        } elseif (Auth::user()->role->libRole == "Responsable") {
+            return redirect('responsable/dashboard');
+        } elseif (Auth::user()->role->libRole == "Directeur") {
+            return redirect('directeur/dashboard');
+        } elseif (Auth::user()->role->libRole == "ChefProjet") {
+            return redirect('chefProjet/dashboard');
+        }
 
+    } else {
+        return redirect()->back()->with('error', 'Adresse mail ou mot de passe invalide');
     }
+}
+
     
     public function logout()
        {

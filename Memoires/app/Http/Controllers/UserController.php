@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function list()
-    {
-        $users=User::all();
-        return view('admin.user.list')->with(compact('users'));
-    }
+        {
+            $users=User::all();
+            return view('admin.user.list')->with(compact('users'));
+        }
 
     public function add()
         {
@@ -102,6 +102,35 @@ class UserController extends Controller
            return redirect()->route('list_user')->with('success', 'Utilisateur supprimer avec succes'); 
        }
    }
+
+//    public function toggleStatus($id)
+//     {
+//         $user = User::findOrFail($id);
+
+//         // Inverse le statut
+//         $user->statut = $user->statut === 'Actif' ? 'Inactif' : 'Actif';
+//         $user->save();
+
+//         // Message de succès
+//         return redirect()->route('admin.user.list')->with('success', 'Le statut de l\'utilisateur a été mis à jour avec succès.');
+//     }
+public function toggleStatus($id)
+    {
+        // Trouver l'utilisateur par son ID
+        $user = User::findOrFail($id);
+        
+        // Basculer le statut entre 'Actif' et 'Inactif'
+        $user->statut = ($user->statut == 'Actif') ? 'Inactif' : 'Actif';
+        
+        // Sauvegarder la modification
+        $user->save();
+        
+        // Retourner une réponse JSON
+        return response()->json([
+            'statut' => $user->statut,
+            'message' => 'Le statut de l\'utilisateur a été mis à jour.'
+        ]);
+    }
 
 }
 

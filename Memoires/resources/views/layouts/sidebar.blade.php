@@ -33,8 +33,9 @@
                         <a href="pages/charts-chartist.html" class="menu-item active">Programmes</a>
                         <a href="pages/charts-chartist.html" class="menu-item active">Structures</a>
                         <a href="pages/charts-chartist.html" class="menu-item active">catégories</a>
-                        <a href="pages/charts-chartist.html" class="menu-item active">Activités</a>
                         <a href="pages/charts-chartist.html" class="menu-item active">Etapes</a>
+                        <a href="{{route('list_activite')}}" class="menu-item active">Activités</a>
+                        
                     </div>
                     
                 </div>

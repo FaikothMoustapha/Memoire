@@ -49,9 +49,12 @@ Route::group(['middleware' => 'admin'], function()
         Route::get('/show/user/{id}', [UserController::class, 'show'])->name('show_user');
         Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('delete_user');
 // Enregistrer un prestataire   
-        Route::get('add/prestataires',[PrestataireController::class,'add'])->name('add_prestataire');
-        Route::get('list/prestataires',[PrestataireController::class,'list'])->name('list_prestataire');
-        Route::post('store/prestataires',[PrestataireController::class,'store'])->name('store_prestataire');
+        Route::get('add/prestataire',[PrestataireController::class,'add'])->name('add_prestataire');
+        Route::get('list/prestataire',[PrestataireController::class,'list'])->name('list_prestataire');
+        Route::post('store/prestataire',[PrestataireController::class,'store'])->name('store_prestataire');
+        Route::get('edit/prestataire/{id}',[PrestataireController::class,'edit'])->name('edit_prestataire');
+        Route::post('update/prestataire/{id}', [PrestataireController::class, 'update'])->name('update_prestataire');
+        Route::delete('prestataire/delete/{id}', [PrestataireController::class, 'delete'])->name('delete_prestataire');
     });
     
 Route::group(['middleware' => 'responsable'], function()
@@ -61,9 +64,9 @@ Route::group(['middleware' => 'responsable'], function()
         Route::post('store/projet',[ResponsableController::class,'store'])->name('store_projet');
         Route::get('list/projet',[ResponsableController::class,'list'])->name('list_projet');
         Route::get('edit/projet/{id}',[ResponsableController::class,'edit'])->name('edit_projet');
-        Route::post('/update/projet/{id}', [ResponsableController::class, 'update'])->name('update_projet');
-        Route::get('/show/projet/{id}', [ResponsableController::class, 'show'])->name('show_projet');
-        Route::delete('/projet/delete/{id}', [ResponsableController::class, 'delete'])->name('delete_projet');
+        Route::post('update/projet/{id}', [ResponsableController::class, 'update'])->name('update_projet');
+        Route::get('show/projet/{id}', [ResponsableController::class, 'show'])->name('show_projet');
+        Route::delete('projet/delete/{id}', [ResponsableController::class, 'delete'])->name('delete_projet');
 
     });
 
@@ -76,8 +79,12 @@ Route::group(['middleware' => 'directeur'], function()
 Route::group(['middleware' => 'chefprojet'], function()
     { 
         Route::get('chefProjet/dashboard',[DashboardController::class,'dashboard'])->name('chefProjet_dashboard');
-        Route::get('add/activite',[ChefProjetController::class,'add'])->name('add_activite');
-        Route::get('list/activite',[ChefProjetController::class,'list'])->name('list_activite');
+        Route::get('add/activite',[ActiviteController::class,'add'])->name('add_activite');
+        Route::post('store/activite',[ActiviteController::class,'store'])->name('store_activite');
+        Route::get('list/activite',[ActiviteController::class,'list'])->name('list_activite');
+        Route::get('edit/activite/{id}',[ActiviteController::class,'edit'])->name('edit_activite');
+        Route::post('update/activite/{id}', [ActiviteController::class, 'update'])->name('update_activite');
+        Route::delete('delete/activite/{id}', [ActiviteController::class, 'delete'])->name('delete_activite');
     });
 
 

@@ -18,7 +18,7 @@ class DirecteurMiddleware
     {
         if (!empty(Auth::check()))
         {
-         if(Auth::user()->roles->libRole == "Directeur")
+         if(Auth::user()->role->libRole == "Directeur")
          {
             return $next($request); 
          }

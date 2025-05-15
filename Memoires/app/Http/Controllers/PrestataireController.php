@@ -29,6 +29,7 @@ class PrestataireController extends Controller
                 'telephone' => 'required'
             ]);
 
+            
             Prestataire::create($request->all());
 
             return redirect()->back()->with('success', 'Prestataire enregistré avec succès.');

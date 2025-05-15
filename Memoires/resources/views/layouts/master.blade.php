@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="{{asset('assets/node_modules/owl.carousel/dist/assets/owl.carousel.css')}}">
         <link rel="stylesheet" href="{{asset('assets/node_modules/owl.carousel/dist/assets/owl.theme.default.css')}}">
         <link rel="stylesheet" href="{{asset('assets/dist/css/theme.min.css')}}">
-
+        
 <!-- Include Choices CSS -->
 <link
   rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
@@ -238,6 +238,9 @@
         <script src="{{asset('assets/js/charts.js')}}"></script>
         <script src="{{asset('assets/dist/js/theme.min.js')}}"></script>
         <script src="{{asset('assets/src/js/vendor/modernizr-2.8.3.min.js')}}"></script>
-       
+       <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+
        </body>
 </html>

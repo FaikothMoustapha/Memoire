@@ -39,10 +39,13 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->telephone }}</td>
                             <td>
-                                <label class="switch">
-                                    <input type="checkbox" class="toggle-status" data-id="{{ $user->id }}" {{ $user->statut === 'Actif' ? 'checked' : '' }}>
-                                    <span class="slider round"></span>
-                                </label>
+                                <form action="{{route('toggle_user_status', $user->id)}}" method="POST">
+                                    @csrf
+                                    <label class="switch">
+                                        <input type="checkbox" class="toggle-status" data-id="{{ $user->id }}" {{ $user->statut === 'Actif' ? 'checked' : '' }}>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </form>
                             </td>
                         
                         <td>{{ $user->role->libRole }}</td>

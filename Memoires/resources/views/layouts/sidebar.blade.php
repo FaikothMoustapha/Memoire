@@ -34,6 +34,11 @@
                             <i class="ik ik-users"></i><span>Gestion des utilisateurs</span>
                         </a>
                     </div>
+                    <div class="nav-item">
+                        <a href="{{route('list_prestataire')}}">
+                            <i class="ik ik-users"></i><span>Prestataires</span>
+                        </a>
+                    </div>
 
                     <div class="nav-item has-sub">
                         <a href="#">

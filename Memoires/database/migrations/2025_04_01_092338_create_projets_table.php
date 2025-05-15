@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('resAttendu');
             $table->date('dateDebut')->nullable();
             $table->date('dateFin')->nullable();
-            $table->integer('duree');
+            $table->integer('duree')->nullable();
             $table->foreignId('categorie_id')->constrained('categories');
             $table->foreignId('prestataire_id')->constrained('prestataires');
             $table->foreignId('programme_id')->constrained('programmes');

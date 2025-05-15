@@ -12,6 +12,7 @@ class DashboardController extends Controller
         if (Auth::user()->role->libRole == "Administrateur")
         {
             // dd('Admin');
+           
             return view('admin/dashboard');
         }
         else if (Auth::user()->role->libRole == 'Responsable') 

@@ -103,34 +103,25 @@ class UserController extends Controller
        }
    }
 
-//    public function toggleStatus($id)
-//     {
-//         $user = User::findOrFail($id);
 
-//         // Inverse le statut
-//         $user->statut = $user->statut === 'Actif' ? 'Inactif' : 'Actif';
-//         $user->save();
+public function toggleStatus($id) {
+    $user = User::find($id);
 
-//         // Message de succès
-//         return redirect()->route('admin.user.list')->with('success', 'Le statut de l\'utilisateur a été mis à jour avec succès.');
-//     }
-public function toggleStatus($id)
-    {
-        // Trouver l'utilisateur par son ID
-        $user = User::findOrFail($id);
-        
-        // Basculer le statut entre 'Actif' et 'Inactif'
-        $user->statut = ($user->statut == 'Actif') ? 'Inactif' : 'Actif';
-        
-        // Sauvegarder la modification
-        $user->save();
-        
-        // Retourner une réponse JSON
+    if (!$user) {
         return response()->json([
-            'statut' => $user->statut,
-            'message' => 'Le statut de l\'utilisateur a été mis à jour.'
-        ]);
+            'statut' => 'Erreur',
+            'message' => 'Utilisateur non trouvé !'
+        ], 404);
     }
+
+    $user->statut = $user->statut === 'Actif' ? 'Inactif' : 'Actif';
+    $user->save();
+
+    return response()->json([
+        'statut' => $user->statut,
+        'message' => 'Statut mis à jour avec succès !'
+    ]);
+}
 
 }
 

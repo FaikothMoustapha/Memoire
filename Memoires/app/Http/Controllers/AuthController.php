@@ -19,10 +19,8 @@ class AuthController extends Controller
     {
         if (!empty(Auth::check())) {
             if (Auth::user()->role->libRole == "Administrateur")
-             {
-                   
+             {   
                 //   dd('Administrateur');
-                
                  return redirect('admin/dashboard');
              }
             else if (Auth::user()->role->libRole == "Responsable")

@@ -3,6 +3,7 @@
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 Swal.fire({
+                    position: "top-end",
                     icon: 'success',
                     title: 'Succès',
                     text: '{{ session('success') }}',

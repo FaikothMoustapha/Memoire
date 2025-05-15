@@ -4,11 +4,15 @@
 <div class="container">
     <div class="card shadow rounded-2">
         <div class="card-body p-5">
-            <h2 class="mb-4 text-center text-primary">📝 Enregistrement d'un Prestataire</h2>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="text-primary">📝 Enregistrement d’un Utilisateur</h2>
+                <a href="{{ route('list_user') }}" class="btn btn-secondary">
+                    🔙 Retour à la liste
+                </a>
+            </div>
             
             <div>
                 @include('alerte.alerte')
-
             </div>
                 
             <form action="{{route('store_prestataire')}}" method="POST">

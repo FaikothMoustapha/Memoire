@@ -38,7 +38,6 @@
                         <td>{{ $user->prenom }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->telephone }}</td>
-<<<<<<< HEAD
 
                         <td>
                             <form action="{{ route('toggle_user_status', $user->id) }}" method="POST">
@@ -57,18 +56,7 @@
                             </span>
                         </td>
 
-=======
-                            <td>
-                                <form action="{{route('toggle_user_status', $user->id)}}" method="POST">
-                                    @csrf
-                                    <label class="switch">
-                                        <input type="checkbox" class="toggle-status" data-id="{{ $user->id }}" {{ $user->statut === 'Actif' ? 'checked' : '' }}>
-                                        <span class="slider round"></span>
-                                    </label>
-                                </form>
-                            </td>
-                        
->>>>>>> 00ef7f076de7e779b07aa4820e1f00d39553794a
+                           
                         <td>{{ $user->role->libRole }}</td>
 
                         <td>

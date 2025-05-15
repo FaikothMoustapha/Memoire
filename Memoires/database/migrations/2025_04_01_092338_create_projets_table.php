@@ -27,7 +27,7 @@ return new class extends Migration
             $table->foreignId('structure_beneficiaire_id')->constrained('structures');
             $table->foreignId('financement_id')->constrained('financements');
             $table->string('PTF')->nullable();
-            $table->foreignId('statuts_projet_id')->constrained('statuts_projets')->default('nouveau');
+            $table->foreignId('statuts_projet_id')->constrained('statut_projets')->default('nouveau');
             $table->foreignId('chef_projet_id')
             ->nullable() // L'ordre est important, nullable() doit être avant constrained()
             ->constrained('users')

@@ -36,7 +36,7 @@
                     </div>
                     <div class="nav-item">
                         <a href="{{route('list_prestataire')}}">
-                            <i class="ik ik-users"></i><span>Prestataires</span>
+                            <i class="fa-solid fa-building me-2"></i><span>Prestataires</span>
                         </a>
                     </div>
 
@@ -45,11 +45,11 @@
                             <i class="ik ik-settings"></i><span>Paramètres du système</span>
                         </a>
                         <div class="submenu-content">
-                            <a href="#" class="menu-item">Programmes</a>
-                            <a href="#" class="menu-item">Structures</a>
-                            <a href="#" class="menu-item">Catégories</a>
-                            <a href="#" class="menu-item">Étapes</a>
-                            <a href="{{route('list_activite')}}" class="menu-item">Activités</a>
+                            <a href="#" class="menu-item"><i class="fa-solid fa-puzzle-piece me-2"></i>Programmes</a>
+                            <a href="#" class="menu-item"><i class="fa-solid fa-building me-2"></i>Structures</a>
+                            <a href="#" class="menu-item"><i class="fa-solid fa-folder-tree me-2"></i>Catégories</a>
+                            <a href="#" class="menu-item"><i class="fa-solid fa-list-ol me-2"></i>Étapes</a>
+                            <a href="{{route('list_activite')}}" class="menu-item"><i class="fa-solid fa-clipboard-list me-2"></i>Activités</a>
                         </div>
                     </div>
 
@@ -120,10 +120,10 @@
                             <i class="ik ik-clipboard"></i><span>Suivi général des projets</span>
                         </a>
                         <div class="submenu-content">
-                            <a href="#" class="menu-item">Projets en cours</a>
-                            <a href="#" class="menu-item">Projets non affectés</a>
-                            <a href="#" class="menu-item">Projets terminés</a>
-                            <a href="#" class="menu-item">Projets abandonnés</a>
+                            <a href="#" class="menu-item"><i class="fa-solid fa-spinner me-2"></i>Projets en cours</a>
+                            <a href="#" class="menu-item"><i class="fa-solid fa-check-circle me-2"></i> Projets non affectés</a>
+                            <a href="#" class="menu-item"><i class="fa-solid fa-question-circle me-2"></i>Projets terminés</a>
+                            <a href="#" class="menu-item"><i class="fa-solid fa-ban me-2"></i>Projets abandonnés</a>
                         </div>
                     </div>
 

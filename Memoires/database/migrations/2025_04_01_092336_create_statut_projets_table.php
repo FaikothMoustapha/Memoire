@@ -11,18 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('statuts_projets', function (Blueprint $table) {
+        Schema::create('statut_projets', function (Blueprint $table) {
             $table->id();
-            $table->string('libelle');
+            $table->string('libStatut');
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('statuts_projet_tables');
+        Schema::dropIfExists('statut_projets');
     }
 };

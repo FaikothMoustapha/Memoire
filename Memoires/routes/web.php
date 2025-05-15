@@ -49,12 +49,7 @@ Route::group(['middleware' => 'admin'], function()
         Route::get('/show/user/{id}', [UserController::class, 'show'])->name('show_user');
         Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('delete_user');
 // Route pour activer/désactiver un utilisateur
-<<<<<<< HEAD
-        Route::post('/user/toggle-status/{id}', [UserController::class, 'toggleStatus'])->name('toggle_user_status');
-=======
         Route::POST('/user/toggle-status/{id}', [UserController::class, 'toggleStatus'])->name('toggle_user_status');
->>>>>>> 00ef7f076de7e779b07aa4820e1f00d39553794a
-
 // Enregistrer un prestataire   
         Route::get('add/prestataire',[PrestataireController::class,'add'])->name('add_prestataire');
         Route::get('list/prestataire',[PrestataireController::class,'list'])->name('list_prestataire');
@@ -74,7 +69,6 @@ Route::group(['middleware' => 'responsable'], function()
         Route::post('update/projet/{id}', [ResponsableController::class, 'update'])->name('update_projet');
         Route::get('show/projet/{id}', [ResponsableController::class, 'show'])->name('show_projet');
         Route::delete('projet/delete/{id}', [ResponsableController::class, 'delete'])->name('delete_projet');
-
     });
 
 Route::group(['middleware' => 'directeur'], function()

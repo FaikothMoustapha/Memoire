@@ -10,14 +10,7 @@
                 <a href="{{route('add_activite')}}"><button type="submit" class="btn btn-primary rounded-2" >➕Ajouter</button></a>
             </div>
             <div >
-                @if (session('success'))
-                <div class="alert alert-success " role="alert">
-                    {{session('success')}}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                @endif
+                @include('alerte.alerte')
             </div>
                 <div class="card-body p-0">
                     <div class="row mb-3 justify-content-center">

@@ -24,7 +24,9 @@
         <link rel="stylesheet" href="{{asset('assets/node_modules/owl.carousel/dist/assets/owl.carousel.css')}}">
         <link rel="stylesheet" href="{{asset('assets/node_modules/owl.carousel/dist/assets/owl.theme.default.css')}}">
         <link rel="stylesheet" href="{{asset('assets/dist/css/theme.min.css')}}">
-        
+        <!-- Font Awesome 6.5 (ou version récente) -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <!-- Include Choices CSS -->
 <link
   rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>

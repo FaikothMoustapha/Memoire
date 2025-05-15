@@ -6,14 +6,7 @@
         <div class="card-body p-5">
             <h2 class="mb-4 text-center text-primary">📝 Enregistrement d’un Projet</h2>
             <div >
-                @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{session('success')}}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
+                @include('alerte.alerte')
             </div>
                 
             <form action="{{route('store_projet')}}" method="POST">
@@ -47,75 +40,83 @@
                 </div>
 
                 <div class="row mb-3">
+                    <!-- Sélection du Programme -->
                     <div class="col-md-4">
-                        <label  class="form-label">Structure initiatrice</label>
-                        
-                        <select class="form-control rounded-2 choices-select" name="structure_initiatrice_id" id="structure_initiatrice_id" multiple >
-                            @foreach ($structures as $Structure)
-                                <option value="{{$Structure->id}}">{{$Structure->libStruc}}</option>                        
+                        <label for="programme_id" class="form-label">Programme</label>
+                        <select class="form-control rounded-2 choices-select" 
+                                name="programme_id" 
+                                id="programme_id">
+                            @foreach ($programmes as $programme)
+                                <option value="{{ $programme->id }}" 
+                                    {{ request()->programme_id == $programme->id ? 'selected' : '' }}>
+                                    {{ $programme->libProg }}
+                                </option>
                             @endforeach
                         </select>
-                        
                     </div>
+
+                    <!-- Structure initiatrice -->
+                    <div class="col-md-4">
+                        <label for="structure_initiatrice_id" class="form-label">Structure initiatrice</label>
+                        <select class="form-control rounded-2 choices-select" name="structure_initiatrice_id" id="structure_initiatrice_id">
+                            @foreach ($structures as $structure)
+                                <option value="{{ $structure->id }}">{{ $structure->libStruc }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Structure bénéficiaire -->
                     <div class="col-md-4">
                         <label for="structure_beneficiaire_id" class="form-label">Structure bénéficiaire</label>
-                        <select class="form-control rounded-2 choices-select" name="structure_beneficiaire_id" id="structure_beneficiaire_id" multiple >
-                            @foreach ($structures as $Structure)
-                                <option value="{{$Structure->id}}">{{$Structure->libStruc}}</option>                        
+                        <select class="form-control rounded-2 choices-select" name="structure_beneficiaire_id" id="structure_beneficiaire_id">
+                            @foreach ($structures as $structure)
+                                <option value="{{ $structure->id }}">{{ $structure->libStruc }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="categorie_id" class="form-label">Catégorie</label>
+                        <select class="form-control rounded-2 choices-select" name="categorie_id" id="categorie_id" multiple >
+                           @foreach ($categories as $Categorie)
+                                <option value="{{$Categorie->id}}">{{$Categorie->libCat}}</option>                        
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label for="financement_id" class="form-label">Source de financement</label>
                         <select class="form-control rounded-2 choices-select" name="financement_id" id="financement_id" multiple >
-                            @foreach ($financements as $Financement)
-                                <option value="{{$Financement->id}}">{{$Financement->libFinancement}}</option>                        
+                           @foreach ($structures as $Structure)
+                                <option value="{{$Structure->id}}">{{$Structure->libStruc}}</option>                        
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="statuts_projet_id" class="form-label">Statut du projet</label>
+                        <select class="form-control rounded-2 choices-select" name="statuts_projet_id" id="statuts_projet_id">
+                            @foreach ($statuts as $statut)
+                                <option value="{{ $statut->id }}">{{ $statut->libStatut }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-
                 <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="categorie_id" class="form-label">Catégorie</label>
-                        <select class="form-control rounded-2 choices-select" name="categorie_id" id="categorie_id"  >
-                            @foreach ($categories as $Categorie)
-                                <option value="{{$Categorie->id}}">{{$Categorie->libCat}}</option>                        
-                            @endforeach
-                        </select>
-                    </div>
                     <div class="col-md-6">
                         <label for="prestataire_id" class="form-label">Prestataire</label>
-                        <select class="form-control rounded-2 choices-select" name="prestataire_id" id="prestataire_id"  >
+                        <select class="form-control rounded-2 choices-select" name="prestataire_id" id="prestataire_id">
                             @foreach ($prestataires as $Prestataire)
-                                <option value="{{$Prestataire->id}}">{{$Prestataire->nomStructure}}</option>                        
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="programme_id" class="form-label">Programme</label>
-                        <select class="form-control rounded-2 choices-select" name="programme_id" id="choices-multiple-remote-fetch"  >
-                            @foreach ($programmes as $Programme)
-                                <option value="{{$Programme->id}}">{{$Programme->libProg}}</option>                        
+                                <option value="{{ $Prestataire->id }}">{{ $Prestataire->nomStructure }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label for="statuts_projet_id" class="form-label">Statut du projet</label>
-                        <select class="form-control rounded-2 choices-select" name="statuts_projet_id" id="statuts_projet_id"  >
-                            <option value="1" selected>Nouveau</option>
-                        </select>    
+                        <label for="PTF" class="form-label">Partenaire technique et financier (PTF)</label>
+                        <input type="text" class="form-control" name="PTF" id="PTF">
                     </div>
                 </div>
-
-                <div class="mb-3">
-                    <label for="PTF" class="form-label">Partenaire technique et financier (PTF)</label>
-                    <input type="text" class="form-control" name="PTF" id="PTF">
-                </div>
-
                 <div class="mb-4 text-center text-primary">
                     <button type="submit" class="btn btn-primary  rounded-2">
                         💾 Enregistrer le projet
@@ -139,9 +140,12 @@
         });
     });
 </script>
-
-
-
+<script>
+    document.getElementById('programme_id').addEventListener('change', function() {
+        const programmeId = this.value;
+        window.location.href = "{{ route('add_projet') }}?programme_id=" + programmeId;
+    });
+</script>
 
 {{-- <script> 
     // Récupérer l'élément
@@ -156,8 +160,6 @@
         itemSelectText: 'Appuyez pour sélectionner',
     });
 </script>  --}}
-
-
 
 @endsection
 

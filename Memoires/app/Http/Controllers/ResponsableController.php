@@ -19,17 +19,25 @@ class ResponsableController extends Controller
             $projets=Projet::all();
             return view('responsable.projets.list')->with(compact('projets'));
         }
-    public function add()
+    public function add(Request $request)
         {
-            $categories=Categorie::all();
-            $prestataires=Prestataire::all();
-            $programmes=Programme::all();
-            $structures=Structure::all();
-            $financements=Financement::all();
-            // $statuts=StatutProjet::all();
-            $users=User::all();
-            return view('responsable.projets.add')->with(compact('categories','prestataires','programmes','structures','financements','users'));            
+            $categories = Categorie::all();
+            $prestataires = Prestataire::all();
+            $programmes = Programme::all();
+            $financements = Financement::all();
+            $statuts = StatutProjet::all();
+            $users = User::all();
+            
+            $structures = collect(); // Collection vide par défaut
+
+            // Si un programme est sélectionné, récupérer ses structures
+            if ($request->has('programme_id') && $request->programme_id != null) {
+                $structures = Structure::where('programme_id', $request->programme_id)->get();
+            }
+
+            return view('responsable.projets.add', compact('categories', 'prestataires', 'programmes','statuts','financements', 'users', 'structures'));
         }
+
 
     public function store(Request $request)
         {
@@ -60,5 +68,4 @@ class ResponsableController extends Controller
             return redirect()->back()->with('success', 'Projet ajouter avec succès');      
         }
 
-        
 }

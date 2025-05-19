@@ -38,19 +38,39 @@
                     <div style="color: red">{{$errors->first('resAttendu')}}</div>
 
                 </div>
-
                 <div class="row mb-3">
-                    <!-- Sélection du Programme -->
+                    <div class="col-md-4">
+                        <label for="categorie_id" class="form-label">Catégorie</label>
+                        <select class="form-control rounded-2 " name="categorie_id" id="categorie_id"  >
+                           @foreach ($categories as $Categorie)
+                                <option value="{{$Categorie->id}}">{{$Categorie->libCat}}</option>                        
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="prestataire_id" class="form-label">Prestataire</label>
+                        <select class="form-control rounded-2 " name="prestataire_id" id="prestataire_id">
+                            @foreach ($prestataires as $Prestataire)
+                                <option value="{{ $Prestataire->id }}">{{ $Prestataire->nomStructure }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="statuts_projet_id" class="form-label">Statut du projet</label>
+                        <select class="form-control rounded-2 " name="statuts_projet_id" id="statuts_projet_id">
+                            @foreach ($statuts as $statut)
+                                <option value="{{ $statut->id }}">{{ $statut->libStatut }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div> 
+                  <!-- Sélection du Programme  -->
+                <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="programme_id" class="form-label">Programme</label>
-                        <select class="form-control rounded-2 choices-select" 
-                                name="programme_id" 
-                                id="programme_id">
+                        <select class="form-control rounded-2" name="programme_id" id="programme_id">
                             @foreach ($programmes as $programme)
-                                <option value="{{ $programme->id }}" 
-                                    {{ request()->programme_id == $programme->id ? 'selected' : '' }}>
-                                    {{ $programme->libProg }}
-                                </option>
+                                <option value="{{ $programme->id }}">{{ $programme->code }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -58,65 +78,39 @@
                     <!-- Structure initiatrice -->
                     <div class="col-md-4">
                         <label for="structure_initiatrice_id" class="form-label">Structure initiatrice</label>
-                        <select class="form-control rounded-2 choices-select" name="structure_initiatrice_id" id="structure_initiatrice_id">
-                            @foreach ($structures as $structure)
-                                <option value="{{ $structure->id }}">{{ $structure->libStruc }}</option>
-                            @endforeach
+                        <select class="form-control rounded-2" name="structure_initiatrice_id" id="structure_initiatrice_id">
                         </select>
                     </div>
 
                     <!-- Structure bénéficiaire -->
                     <div class="col-md-4">
                         <label for="structure_beneficiaire_id" class="form-label">Structure bénéficiaire</label>
-                        <select class="form-control rounded-2 choices-select" name="structure_beneficiaire_id" id="structure_beneficiaire_id">
+                        <select class="form-control rounded-2" name="structure_beneficiaire_id" id="structure_beneficiaire_id">
                             @foreach ($structures as $structure)
-                                <option value="{{ $structure->id }}">{{ $structure->libStruc }}</option>
+                                <option value="{{ $structure->id }}">{{ $structure->code }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
 
-
+                <!-- Sélection du Financement -->
                 <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="categorie_id" class="form-label">Catégorie</label>
-                        <select class="form-control rounded-2 choices-select" name="categorie_id" id="categorie_id" multiple >
-                           @foreach ($categories as $Categorie)
-                                <option value="{{$Categorie->id}}">{{$Categorie->libCat}}</option>                        
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="financement_id" class="form-label">Source de financement</label>
-                        <select class="form-control rounded-2 choices-select" name="financement_id" id="financement_id" multiple >
-                           @foreach ($structures as $Structure)
-                                <option value="{{$Structure->id}}">{{$Structure->libStruc}}</option>                        
+                        <select class="form-control rounded-2" name="financement_id" id="financement_id">
+                            @foreach ($financements as $Financements)
+                                <option value="{{ $Financements->id }}">{{ $Financements->libFinancement }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-4">
-                        <label for="statuts_projet_id" class="form-label">Statut du projet</label>
-                        <select class="form-control rounded-2 choices-select" name="statuts_projet_id" id="statuts_projet_id">
-                            @foreach ($statuts as $statut)
-                                <option value="{{ $statut->id }}">{{ $statut->libStatut }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="prestataire_id" class="form-label">Prestataire</label>
-                        <select class="form-control rounded-2 choices-select" name="prestataire_id" id="prestataire_id">
-                            @foreach ($prestataires as $Prestataire)
-                                <option value="{{ $Prestataire->id }}">{{ $Prestataire->nomStructure }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="PTF" class="form-label">Partenaire technique et financier (PTF)</label>
+
+                    <!-- PTF caché par défaut -->
+                    <div class="col-md-6" id="ptf_container" style="display: none;">
+                        <label for="PTF" class="form-label">Partenaire Technique et Financier (PTF)</label>
                         <input type="text" class="form-control" name="PTF" id="PTF">
                     </div>
                 </div>
+                
                 <div class="mb-4 text-center text-primary">
                     <button type="submit" class="btn btn-primary  rounded-2">
                         💾 Enregistrer le projet
@@ -128,7 +122,7 @@
 </div>
 
 {{-- Script Choices.js --}}
-<script>
+<!-- <script>
     document.querySelectorAll('.choices-select').forEach(function(select) {
         new Choices(select, {
             placeholder: true,
@@ -139,15 +133,57 @@
             itemSelectText: 'Appuyez pour sélectionner',
         });
     });
-</script>
+</script> -->
 <script>
+    // 🎯 Sélection du programme
     document.getElementById('programme_id').addEventListener('change', function() {
         const programmeId = this.value;
-        window.location.href = "{{ route('add_projet') }}?programme_id=" + programmeId;
+
+        // Requête AJAX pour récupérer les structures liées au programme
+        fetch(`/structures/${programmeId}`)
+            .then(response => response.json())
+            .then(data => {
+                const structureInitiatriceSelect = document.getElementById('structure_initiatrice_id');
+                // const structureBeneficiaireSelect = document.getElementById('structure_beneficiaire_id');
+
+                // Vider les selects
+                structureInitiatriceSelect.innerHTML = '';
+                // structureBeneficiaireSelect.innerHTML = '';
+
+                // Ajouter les nouvelles options
+                data.forEach(structure => {
+                    const option = new Option(structure.libStruc, structure.id);
+                    structureInitiatriceSelect.add(option);
+
+                    // Cloner l'option pour l'autre select
+                    const optionClone = new Option(structure.libStruc, structure.id);
+                    structureBeneficiaireSelect.add(optionClone);
+                });
+            })
+            .catch(error => console.error('Erreur:', error));
     });
+
+    // 🎯 Gestion du PTF selon le type de financement
+    document.getElementById('financement_id').addEventListener('change', function() {
+    const selectedText = this.options[this.selectedIndex].text.trim().toLowerCase();
+    const ptfContainer = document.getElementById('ptf_container');
+
+    if (selectedText.includes('don')) {
+        ptfContainer.style.display = 'block';
+    } else {
+        ptfContainer.style.display = 'none';
+        document.getElementById('PTF').value = ''; // On vide le champ
+    }
+});
+
+
+    // Cacher le champ PTF par défaut
+    document.getElementById('PTF').parentElement.style.display = 'none';
 </script>
 
-{{-- <script> 
+
+
+<!-- {{-- <script> 
     // Récupérer l'élément
     var selectElement = document.getElementById('choices-multiple-remote-fetch');
 
@@ -159,7 +195,7 @@
         noChoicesText: 'Aucun choix à sélectionner',
         itemSelectText: 'Appuyez pour sélectionner',
     });
-</script>  --}}
+</script>  --}} -->
 
 @endsection
 

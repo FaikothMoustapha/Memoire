@@ -121,7 +121,7 @@
                         </a>
                         <div class="submenu-content">
                             <a href="#" class="menu-item"><i class="fa-solid fa-spinner me-2"></i>Projets en cours</a>
-                            <a href="#" class="menu-item"><i class="fa-solid fa-check-circle me-2"></i> Projets non affectés</a>
+                            <a href="{{route('list_projet_n_affect')}}" class="menu-item"><i class="fa-solid fa-check-circle me-2"></i> Projets non affectés</a>
                             <a href="#" class="menu-item"><i class="fa-solid fa-question-circle me-2"></i>Projets terminés</a>
                             <a href="#" class="menu-item"><i class="fa-solid fa-ban me-2"></i>Projets abandonnés</a>
                         </div>
@@ -147,9 +147,9 @@
                     </div> 
 
                     <div class="nav-item">
-                        <a href="#">
+                        <a href="{{ route('projets_parchef', ['id' => auth()->user()->id]) }}">
                             <i class="ik ik-folder"></i><span>Mes projets</span>
-                        </a>
+                        </a>                        
                     </div>
 
                     <div class="nav-item">

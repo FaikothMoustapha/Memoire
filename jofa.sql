@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 15 mai 2025 à 11:54
+-- Généré le : lun. 19 mai 2025 à 20:11
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -278,6 +278,14 @@ CREATE TABLE `financements` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Déchargement des données de la table `financements`
+--
+
+INSERT INTO `financements` (`id`, `libFinancement`, `created_at`, `updated_at`) VALUES
+(1, 'BN', NULL, NULL),
+(2, 'DON', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -341,11 +349,40 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2025_04_01_092002_create_etapes_table', 1),
 (10, '2025_04_01_092018_create_activites_table', 1),
 (11, '2025_04_01_092253_create_structures_table', 1),
-(12, '2025_04_01_092336_create_statuts_projets_table', 1),
-(13, '2025_04_01_092337_create_financements_table', 1),
-(20, '2025_04_01_092338_create_projets_table', 2),
-(21, '2025_04_01_092411_create_reunions_table', 2),
-(22, '2025_04_01_092412_create_documents_table', 2);
+(23, '2025_04_01_092336_create_statut_projets_table', 2),
+(24, '2025_04_01_092337_create_financements_table', 2),
+(25, '2025_04_01_092338_create_projets_table', 2),
+(26, '2025_04_01_092411_create_reunions_table', 2),
+(27, '2025_04_01_092412_create_documents_table', 2),
+(28, '2025_05_19_094340_create_notifications_table', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` char(36) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `notifiable_type` varchar(255) NOT NULL,
+  `notifiable_id` bigint(20) UNSIGNED NOT NULL,
+  `data` text NOT NULL,
+  `read_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `data`, `read_at`, `created_at`, `updated_at`) VALUES
+('51b8a25b-63db-4cdc-bbbb-c0b2706962ba', 'App\\Notifications\\NouveauProjetCree', 'App\\Models\\User', 2, '[]', NULL, '2025-05-19 10:57:57', '2025-05-19 10:57:57'),
+('65e8f740-0ac3-46fd-935e-8a09a8097456', 'App\\Notifications\\NouveauProjetCree', 'App\\Models\\User', 2, '[]', NULL, '2025-05-19 13:35:06', '2025-05-19 13:35:06'),
+('70867720-143d-4293-b2e9-254d3e3f6753', 'App\\Notifications\\NouveauProjetCree', 'App\\Models\\User', 2, '[]', NULL, '2025-05-19 15:17:46', '2025-05-19 15:17:46'),
+('a30932f6-20c0-48d9-a663-8e1b519758aa', 'App\\Notifications\\NouveauProjetCree', 'App\\Models\\User', 2, '[]', NULL, '2025-05-19 10:53:31', '2025-05-19 10:53:31'),
+('f3062307-693a-4a5f-a616-4a6e83c49caf', 'App\\Notifications\\NouveauProjetCree', 'App\\Models\\User', 2, '[]', NULL, '2025-05-19 10:37:58', '2025-05-19 10:37:58');
 
 -- --------------------------------------------------------
 
@@ -381,10 +418,10 @@ CREATE TABLE `prestataires` (
 --
 
 INSERT INTO `prestataires` (`id`, `code`, `nomStructure`, `nomResponsable`, `email`, `telephone`, `created_at`, `updated_at`) VALUES
-(3, 'lkjhgfdsdfghjk', 'jhgfdswxdcfvgbhnjk,jhgfcdxswqwsxdfcgvbhnj', 'hgfvbn', 'seUUIK@gmail.com', '1234567890234567890', '2025-05-15 08:00:04', '2025-05-15 08:00:04'),
-(4, 'da112', 'OIUYTREQQSYUIOPPOIUYTRA4567890°987YTREZARTG', 'hgfvbn', 'joOIUYTDDFK@gmail.com', '23456789O63456789', '2025-05-15 08:04:28', '2025-05-15 08:04:28'),
-(6, 'fghjk', 'kjhgfdsqazertyujklmùmytrezqsdfghjknbvghbvhgv', 'mmommm', 'sennnn@gmail.com', '23456789O63456789', '2025-05-15 08:25:59', '2025-05-15 08:25:59'),
-(7, 'HHHHH', 'MLKJHGFDSQSDFGHJKOPOIUYTRESGHJKLKJHGF', 'LOLO', 'chefkjhgfjnbvgjhghg@gmail.com', '09876543234567890', '2025-05-15 08:27:53', '2025-05-15 08:27:53');
+(8, 'CAA1', 'Windect industri', 'MOMO Vivi', 'vi@gmail.com', '1234567890', NULL, NULL),
+(9, 'CVAA1', 'Intech', 'LALO Dossou', 'do@gmail.com', '0198765432', NULL, NULL),
+(10, 'BACC2', 'Vinch mobil', 'SOSOU ben', 'ben@gmail.com', '0123456789', NULL, NULL),
+(11, 'BAVE2', 'Laravel society', 'MIGAN Faïssolath', 'soso@gmail.com', '0198234567', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -399,6 +436,16 @@ CREATE TABLE `programmes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `programmes`
+--
+
+INSERT INTO `programmes` (`id`, `code`, `libProg`, `created_at`, `updated_at`) VALUES
+(1, 'PPSS', 'PPSS', NULL, NULL),
+(2, 'PVTD', 'PVTD', NULL, NULL),
+(3, 'PCH', 'PCH', NULL, NULL),
+(4, 'PIT', 'PIT', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -427,6 +474,24 @@ CREATE TABLE `projets` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `projets`
+--
+
+INSERT INTO `projets` (`id`, `code`, `libProj`, `objectifs`, `resAttendu`, `dateDebut`, `dateFin`, `duree`, `categorie_id`, `prestataire_id`, `programme_id`, `structure_initiatrice_id`, `structure_beneficiaire_id`, `financement_id`, `PTF`, `statuts_projet_id`, `chef_projet_id`, `created_at`, `updated_at`) VALUES
+(1, 'lkjhgfdsdfghjk', 'cxwxdcfvgbn,;:;,nbvcvbn,', 'lkjhgfdswxcvbn,;:', 'ogfddfghjklmù', NULL, NULL, NULL, 1, 8, 4, 4, 4, 2, 'lkj', 1, NULL, '2025-05-19 08:52:41', '2025-05-19 08:52:41'),
+(2, 'hgfghjklkjhb', 'SDFGFDSDFDSDFG', 'kojihuygftdresrtyhuijkolp^mpoiufcdxsdfcgvhbnjk,l', 'lkoijhuygftdrexsxrctyuijkopm^ùigfdsdxfcgvhbnjk,l;m', NULL, NULL, NULL, 1, 8, 2, 2, 2, 1, 'j,n,n', 1, NULL, '2025-05-19 09:04:21', '2025-05-19 09:04:21'),
+(4, 'lllll', 'mlkjhgfdsq', 'MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM', 'PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP', NULL, NULL, NULL, 1, 8, 4, 4, 3, 1, NULL, 1, 2, '2025-05-19 09:58:16', '2025-05-19 16:14:00'),
+(5, 'QSDFGHJ', 'SDFGHJKLM%MLKJHGFD', 'SDFGHJKLKJHGFDZEERHJKILUYT', 'RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR', NULL, NULL, NULL, 1, 8, 2, 2, 1, 1, NULL, 1, NULL, '2025-05-19 10:00:28', '2025-05-19 10:00:28'),
+(7, '1234', 'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH', 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO', 'RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR', NULL, NULL, NULL, 1, 8, 2, 2, 1, 1, NULL, 1, NULL, '2025-05-19 10:14:14', '2025-05-19 10:14:14'),
+(8, 'lkjbllllllll', 'mmmmmmmmmmmmmmmm', 'oooooooooooooooooooooooooooooooooooollllllllllllllllll', 'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk', NULL, NULL, NULL, 1, 8, 2, 2, 1, 1, NULL, 1, NULL, '2025-05-19 10:21:18', '2025-05-19 10:21:18'),
+(9, 'ertyuiiuytr', 'azertyuiop', 'qsdfghjklmlkjhgfdsdfghjklmùùkjhgfd', 'lkjhgfcxghvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', NULL, NULL, NULL, 2, 8, 3, 3, 1, 1, NULL, 1, NULL, '2025-05-19 10:26:03', '2025-05-19 10:26:03'),
+(10, 'nnnnnnn', 'xxxxxxxxxxxxxxxxxxxxxxxxxxx', 'sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', NULL, NULL, NULL, 1, 8, 3, 3, 1, 1, NULL, 1, NULL, '2025-05-19 10:37:50', '2025-05-19 10:37:50'),
+(11, 'bbbbbbbbbbbbbb', ',,,,kkkkkkkkkkkkkkkkkkkkk', 'bbbbbbbbbbbbbbbbbbbbbbbbbbbnnnnnnnnnnnnnnnn', 'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnbbbbbbbbbbb', NULL, NULL, NULL, 1, 8, 2, 2, 1, 1, NULL, 1, NULL, '2025-05-19 10:53:27', '2025-05-19 10:53:27'),
+(12, 'mmmmo', 'nnnnnnnnnnnwwwsfffffffff', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', NULL, NULL, NULL, 1, 8, 2, 2, 1, 1, NULL, 1, NULL, '2025-05-19 10:57:52', '2025-05-19 10:57:52'),
+(13, ':::::::::::', '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', '§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§', '//////////////////////////////////////////////////////////////////////////////', NULL, NULL, NULL, 1, 8, 2, 2, 1, 1, NULL, 1, NULL, '2025-05-19 13:34:59', '2025-05-19 13:34:59'),
+(14, 'CODI', 'Code  Opportun pour la Direction Informatique', 'kbgctdxtdxjfljlnljn nln xn xjn xl x', 'cx dnbudhfbuidhbudhbidhbiudhbiudhbhdfibhi', NULL, NULL, NULL, 1, 10, 3, 3, 1, 2, 'kndlj bd njn jgnd jdng n gjd', 1, 4, '2025-05-19 15:17:20', '2025-05-19 16:14:30');
 
 -- --------------------------------------------------------
 
@@ -489,20 +554,29 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('9BGAAf7F8X1oHAHOUJdk1aMbAz0IY94HhzNJ6aRV', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidTJqV1U4bTA2aGIzRkdQYWVRSURaWklDQVZLUE5KRHZNR29SQUQxcyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9saXN0L3ByZXN0YXRhaXJlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1747301685);
+('gqrKNa90S0fa8WUCnDVS3NNxslCimQg7HjYIDY2M', 4, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWG9oNGNsMHVKdjZBYVlxTE5xVG9GVElRR2tDZHNQSUQxSGpReFVlciI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9wcm9qZXRzL2NoZWYvZmF2aWNvbi5pY28iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo0O30=', 1747678035),
+('i2K9jxZVI8Ux8vqDM9W2TncLlokiXUhnWinilILH', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVEsyN1pDNWxJRGY5dzNLQnhpdUl6dTlVNnM4MjR5TkxhczI5MDA1NyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDQ6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9saXN0L3Byb2pldC9uL2FmZmVjdGVyIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1747672682);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `statuts_projets`
+-- Structure de la table `statut_projets`
 --
 
-CREATE TABLE `statuts_projets` (
+CREATE TABLE `statut_projets` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `libelle` varchar(255) NOT NULL,
+  `libStatut` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `statut_projets`
+--
+
+INSERT INTO `statut_projets` (`id`, `libStatut`, `created_at`, `updated_at`) VALUES
+(1, 'nouveau', NULL, NULL),
+(2, 'terminé', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -518,6 +592,16 @@ CREATE TABLE `structures` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `structures`
+--
+
+INSERT INTO `structures` (`id`, `code`, `libStruc`, `programme_id`, `created_at`, `updated_at`) VALUES
+(1, 'DPAF', 'DPAF', 1, NULL, NULL),
+(2, 'DIS', 'DIS', 2, NULL, NULL),
+(3, 'DGEC', 'DGEC', 3, NULL, NULL),
+(4, 'DGDI', 'DGDI', 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -643,6 +727,13 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `notifications_notifiable_type_notifiable_id_index` (`notifiable_type`,`notifiable_id`);
+
+--
 -- Index pour la table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
@@ -701,9 +792,9 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
--- Index pour la table `statuts_projets`
+-- Index pour la table `statut_projets`
 --
-ALTER TABLE `statuts_projets`
+ALTER TABLE `statut_projets`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -766,7 +857,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT pour la table `financements`
 --
 ALTER TABLE `financements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `jobs`
@@ -778,25 +869,25 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT pour la table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT pour la table `prestataires`
 --
 ALTER TABLE `prestataires`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `programmes`
 --
 ALTER TABLE `programmes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `projets`
 --
 ALTER TABLE `projets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `reunions`
@@ -811,16 +902,16 @@ ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT pour la table `statuts_projets`
+-- AUTO_INCREMENT pour la table `statut_projets`
 --
-ALTER TABLE `statuts_projets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `statut_projets`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `structures`
 --
 ALTER TABLE `structures`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `typedocs`
@@ -866,7 +957,7 @@ ALTER TABLE `projets`
   ADD CONSTRAINT `projets_financement_id_foreign` FOREIGN KEY (`financement_id`) REFERENCES `financements` (`id`),
   ADD CONSTRAINT `projets_prestataire_id_foreign` FOREIGN KEY (`prestataire_id`) REFERENCES `prestataires` (`id`),
   ADD CONSTRAINT `projets_programme_id_foreign` FOREIGN KEY (`programme_id`) REFERENCES `programmes` (`id`),
-  ADD CONSTRAINT `projets_statuts_projet_id_foreign` FOREIGN KEY (`statuts_projet_id`) REFERENCES `statuts_projets` (`id`),
+  ADD CONSTRAINT `projets_statuts_projet_id_foreign` FOREIGN KEY (`statuts_projet_id`) REFERENCES `statut_projets` (`id`),
   ADD CONSTRAINT `projets_structure_beneficiaire_id_foreign` FOREIGN KEY (`structure_beneficiaire_id`) REFERENCES `structures` (`id`),
   ADD CONSTRAINT `projets_structure_initiatrice_id_foreign` FOREIGN KEY (`structure_initiatrice_id`) REFERENCES `structures` (`id`);
 

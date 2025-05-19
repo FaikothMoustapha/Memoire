@@ -5,9 +5,6 @@
     <!-- En-tête -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="text-primary">📋 LISTE DES PROJETS CRÉÉS</h3>
-        <a href="{{ route('add_user') }}">
-            <button type="submit" class="btn btn-primary rounded-2">➕ Ajouter</button>
-        </a>
     </div>
 
     <!-- Barre de recherche -->
@@ -18,7 +15,7 @@
     <!-- Tableau -->
     <div class="card shadow rounded-2">
         <div class="card-body p-0">
-            <table class="table table-hover mb-0" id="userTable">
+            <table class="table table-hover mb-0" id="projectTable">
                 <thead class="table-primary">
                     <tr>
                         <th class="text-center">CODE DU PROJET</th>
@@ -42,32 +39,9 @@
                         <td class="text-center">{{ $projet->categorie->libCat }}</td>
                         <td class="text-center">{{ $projet->statut->libStatut }}</td>
                         <td class="text-center">
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                    <ul>
-                                        <li>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-eye text-primary me-2"></i>Détails</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                                <i class="fas fa-edit text-success me-2"></i> Modifier
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <form action="#" method="POST" onsubmit="return confirmDelete();">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="dropdown-item d-flex align-items-center text-danger">
-                                                    <i class="fas fa-trash-alt me-2"></i> Supprimer
-                                                </button>
-                                            </form>                                                                    
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <a href="{{route('affecter_projet',$projet->id)}}" class="btn btn-success btn-sm">
+                                <i class="fas fa-user-plus"></i> Affecter
+                            </a>
                         </td>
                     </tr>
                     @endforeach
@@ -79,18 +53,14 @@
 
 <!-- Scripts Bootstrap et jQuery -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    // Fonction de confirmation de suppression
-    function confirmDelete() {
-        return confirm('Voulez-vous vraiment supprimer ce projet ?');
-    }
-
     // Barre de recherche
     document.getElementById('searchInput').addEventListener('keyup', function () {
         let filter = this.value.toLowerCase();
-        let rows = document.querySelectorAll('#userTable tbody tr');
+        let rows = document.querySelectorAll('#projectTable tbody tr');
 
         rows.forEach(function (row) {
             let text = row.textContent.toLowerCase();

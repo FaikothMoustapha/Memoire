@@ -3,7 +3,9 @@ use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChefProjetController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DirecteurController;
 use App\Http\Controllers\PrestataireController;
+use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\ResponsableController;
 use App\Http\Controllers\UserController;
 use App\Models\Prestataire;
@@ -69,11 +71,16 @@ Route::group(['middleware' => 'responsable'], function()
         Route::post('update/projet/{id}', [ResponsableController::class, 'update'])->name('update_projet');
         Route::get('show/projet/{id}', [ResponsableController::class, 'show'])->name('show_projet');
         Route::delete('projet/delete/{id}', [ResponsableController::class, 'delete'])->name('delete_projet');
+        Route::get('/structures/{programme_id}', [ResponsableController::class, 'getStructuresByProgramme']);
+
     });
 
 Route::group(['middleware' => 'directeur'], function()
     {
         Route::get('directeur/dashboard',[DashboardController::class,'dashboard'])->name('directeur_dashboard');
+        Route::get('list/projet/n/affecter',[DirecteurController::class,'list'])->name('list_projet_n_affect');
+        Route::post('update/projet/n/affecter{id}', [DirecteurController::class, 'update'])->name('update_projet_n_affect');
+        Route::get('affecter/projet/{id}',[DirecteurController::class,'affecter'])->name('affecter_projet');
     });
 
 
@@ -86,7 +93,12 @@ Route::group(['middleware' => 'chefprojet'], function()
         Route::get('edit/activite/{id}',[ActiviteController::class,'edit'])->name('edit_activite');
         Route::post('update/activite/{id}', [ActiviteController::class, 'update'])->name('update_activite');
         Route::delete('delete/activite/{id}', [ActiviteController::class, 'delete'])->name('delete_activite');
+        Route::get('/projets/chef/{id}', [ProjetController::class, 'projetsParChef'])->name('projets_parchef');
+
     });
+
+    
+    
 
 
 

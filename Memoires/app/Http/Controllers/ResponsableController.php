@@ -10,6 +10,7 @@ use App\Models\Projet;
 use App\Models\StatutProjet;
 use App\Models\Structure;
 use App\Models\User;
+use App\Notifications\NouveauProjetCree;
 use Illuminate\Http\Request;
 
 class ResponsableController extends Controller
@@ -19,6 +20,7 @@ class ResponsableController extends Controller
             $projets=Projet::all();
             return view('responsable.projets.list')->with(compact('projets'));
         }
+        
     public function add(Request $request)
         {
             $categories = Categorie::all();
@@ -27,23 +29,22 @@ class ResponsableController extends Controller
             $financements = Financement::all();
             $statuts = StatutProjet::all();
             $users = User::all();
-            
-            $structures = collect(); // Collection vide par défaut
-
-            // Si un programme est sélectionné, récupérer ses structures
-            if ($request->has('programme_id') && $request->programme_id != null) {
-                $structures = Structure::where('programme_id', $request->programme_id)->get();
-            }
-
-            return view('responsable.projets.add', compact('categories', 'prestataires', 'programmes','statuts','financements', 'users', 'structures'));
+            $structures = Structure::all();
+            return view('responsable.projets.add')-> with(compact('categories', 'prestataires', 'programmes','statuts','financements', 'users', 'structures'));
         }
+        public function getStructuresByProgramme($programme_id)
+            {
+                $structures = Structure::where('programme_id', $programme_id)->get();
+                return response()->json($structures);
+            }
 
 
     public function store(Request $request)
         {
             //  dd($request->all());
+            
             $request->validate([
-                'code' => 'required|string|min:3',
+                'code' => 'required|string|mi-n:3',
                 'libProj' => 'required|string|min:3',
                'objectifs' =>'required|string|min:10',
                'resAttendu' => 'required|string|min:10',
@@ -63,9 +64,27 @@ class ResponsableController extends Controller
             $projets->financement_id=$request->financement_id;           
             $projets->PTF=$request->PTF;           
             $projets->statuts_projet_id=$request->statuts_projet_id;           
-            $projets->chef_projet_id=$request->chef_projet_id;           
-            $projets->save();            
+            $projets->chef_projet_id=$request->chef_projet_id;       
+            $projets->save();      
+            
+            $directeur = User::where('role_id', '3')->first();
+
+            if ($directeur) {
+                $directeur->notify(new NouveauProjetCree($projets));
+            }
             return redirect()->back()->with('success', 'Projet ajouter avec succès');      
         }
+
+        // public function show($id)
+        // {
+        //  //  dd($id);
+        //   $roles=Role::all();
+        //   $projets=User::findOrFail($id);
+          
+        //   // dd($stagiaires);
+        //   return view('admin.user.show')->with(compact('users','roles'));
+      
+        // }
+
 
 }

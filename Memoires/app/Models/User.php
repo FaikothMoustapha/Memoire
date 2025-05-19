@@ -69,5 +69,10 @@ class User extends Authenticatable
         {
             return $this->belongsTo(Role::class,'role_id');
         }
+    public function projetsAffectes()
+        {
+            return $this->hasMany(Projet::class, 'chef_projet_id');
+        }
+        
 
 }

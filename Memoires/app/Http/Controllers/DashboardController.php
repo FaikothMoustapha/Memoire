@@ -21,11 +21,17 @@ class DashboardController extends Controller
         }
         else if (Auth::user()->role->libRole == 'Directeur') 
         {
-            return view('directeur/dashboard');
+            $abandonnes= 2;
+            $termines = 12;
+            $encours = 7;
+            $nouveaux = 5;
+            return view('directeur.dashboard', compact('termines', 'encours', 'nouveaux','abandonnes'));
+            
         }
         else if (Auth::user()->role->libRole == 'ChefProjet') 
         {
             return view('chefProjet/dashboard');
         }
     }
+
 }

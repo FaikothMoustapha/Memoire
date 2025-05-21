@@ -9,7 +9,18 @@ class NotificationController extends Controller
    public function index()
     {
         $notifications = Auth::user()->notifications;
-        return view('directeur.notification', compact('notifications'));
+        return view('directeur.notification.projet_creer', compact('notifications'));
+    }
+    public function markAllAsRead()
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            $user->unreadNotifications->markAsRead(); // uniquement les non lues
+            return redirect()->back()->with('success', 'Toutes les notifications ont été marquées comme lues.');
+        }
+
+        return redirect()->back()->with('error', 'Utilisateur non authentifié.');
     }
 
    public function markAsRead($id)

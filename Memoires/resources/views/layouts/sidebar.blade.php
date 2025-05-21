@@ -104,7 +104,7 @@
                     <div class="nav-lavel">DSI</div>
 
                     <div class="nav-item active">
-                        <a href="#">
+                        <a href="{{route('directeur_dashboard')}}">
                             <i class="ik ik-bar-chart-2"></i><span>Tableau de bord</span>
                         </a>
                     </div> 
@@ -121,23 +121,22 @@
                         </a>
                         <div class="submenu-content">
                             <a href="#" class="menu-item"><i class="fa-solid fa-spinner me-2"></i>Projets en cours</a>
-                            <a href="{{route('list_projet_n_affect')}}" class="menu-item"><i class="fa-solid fa-check-circle me-2"></i> Projets non affectés</a>
-                            <a href="#" class="menu-item"><i class="fa-solid fa-question-circle me-2"></i>Projets terminés</a>
+                            <a href="{{route('list_projet_n_affect')}}" class="menu-item"><i class="fa-solid fa-question-circle me-2"></i> Projets non affectés</a>
+                            <a href="#" class="menu-item"><i class="fa-solid fa-check-circle me-2"></i>Projets terminés</a>
                             <a href="#" class="menu-item"><i class="fa-solid fa-ban me-2"></i>Projets abandonnés</a>
                         </div>
                     </div>
 
                     <div class="nav-item">
-                        <a href="{{ route('notifications') }}">
-                            <i class="ik ik-bell"></i>
-                            <span>Notifications</span>
-                            @php
-                                $unreadCount = auth()->user()->unreadNotifications->count();
-                            @endphp
-                            @if ($unreadCount > 0)
-                                <span class="badge badge-danger">{{ $unreadCount }}</span>
-                            @endif
-                        </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('notifications') }}">
+                                <i class="ik ik-bell"> </i> <span>Notifications</span>
+                                @if(auth()->user()->unreadNotifications->count() > 0)
+                                    <span class="badge bg-danger">{{ auth()->user()->unreadNotifications->count() }}</span>
+                                @endif
+                            </a>
+                        </li>
+
                     </div> 
                 </nav>
             @break
@@ -184,9 +183,17 @@
                     </div>
 
                     <div class="nav-item">
-                        <a href="#">
-                            <i class="ik ik-bell"></i><span>Notifications</span>
-                        </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('notifications') }}">
+                                <i class="ik ik-bell"> </i> <span>Notifications</span>
+                                @php
+                                    $unreadCount = auth()->user()->unreadNotifications->count();
+                                @endphp
+                                @if($unreadCount > 0)
+                                    <span class="badge bg-danger">{{ $unreadCount }}</span>
+                                @endif
+                            </a>
+                        </li>
                     </div> 
                 </nav>      
             @break

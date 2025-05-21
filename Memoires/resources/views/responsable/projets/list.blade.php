@@ -49,10 +49,12 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                                     <ul>
                                         <li>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-eye text-primary me-2"></i>Détails</a>
+                                            <a class="dropdown-item" href="{{route('show_projet',$projet->id)}}">
+                                                <i class="fas fa-eye text-primary me-2"></i>Détails
+                                            </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <a class="dropdown-item d-flex align-items-center" href="{{route('edit_projet',$projet->id)}}">
                                                 <i class="fas fa-edit text-success me-2"></i> Modifier
                                             </a>
                                         </li>
@@ -97,6 +99,8 @@
             row.style.display = text.includes(filter) ? '' : 'none';
         });
     });
+
+   
 </script>
 
 @endsection

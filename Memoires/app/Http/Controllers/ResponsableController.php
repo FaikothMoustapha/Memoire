@@ -75,16 +75,82 @@ class ResponsableController extends Controller
             return redirect()->back()->with('success', 'Projet ajouter avec succès');      
         }
 
-        // public function show($id)
-        // {
-        //  //  dd($id);
-        //   $roles=Role::all();
-        //   $projets=User::findOrFail($id);
+        public function edit($id)
+        {
+            // c'est pour recuper les
+            // dd($id);
+            
+            $categories = Categorie::all();
+            $prestataires = Prestataire::all();
+            $programmes = Programme::all();
+            $financements = Financement::all();
+            $statuts = StatutProjet::all();
+            $users = User::all();
+            $structures = Structure::all();
+            $projets=Projet::findOrFail($id);
+            
+            // dd($roles);
+            return view('responsable.projets.edit')-> with(compact('categories', 'prestataires', 'programmes','statuts','financements', 'users', 'structures','projets'));
+            
+        }
+    
+        public function update(Request $request,$id)
+        {
+             $request->validate([
+                'code' => 'required|string|min:3',
+                'libProj' => 'required|string|min:3',
+                'objectifs' =>'required|string|min:10',
+                'resAttendu' => 'required|string|min:10',
+             ]);
+            $projets=Projet::findOrFail($id);
+        //    dd($request->id);
+            $projets->code=$request->code;
+            $projets->libProj=$request->libProj;
+            $projets->objectifs=$request->objectifs;
+            $projets->resAttendu=$request->resAttendu;
+            $projets->categorie_id=$request->categorie_id;
+            $projets->prestataire_id=$request->prestataire_id;
+            $projets->programme_id=$request->programme_id; 
+            $projets->structure_initiatrice_id=$request->structure_initiatrice_id;           
+            $projets->structure_beneficiaire_id=$request->structure_beneficiaire_id;           
+            $projets->financement_id=$request->financement_id;           
+            $projets->PTF=$request->PTF;           
+            $projets->statuts_projet_id=$request->statuts_projet_id;           
+            $projets->chef_projet_id=$request->chef_projet_id;       
+            $projets->save(); 
+           return redirect()->route('list_projet')->with('success', 'Projet modifier avec succès');  
+        }
+    
+
+        public function show($id)
+   {
+    //  dd($id);
+     $categories = Categorie::all();
+     $prestataires = Prestataire::all();
+     $programmes = Programme::all();
+     $financements = Financement::all();
+     $statuts = StatutProjet::all();
+     $users = User::all();
+     $structures = Structure::all();
+     $projets=Projet::findOrFail($id);
+     
+     // dd($stagiaires);
+     return view('responsable.projets.show')-> with(compact('categories', 'prestataires', 'programmes','statuts','financements', 'users', 'structures','projets'));
+ 
+   }
+    //     public function delete($id)
+    //    {
+    //        // Trouver le stagiaire par son ID
           
-        //   // dd($stagiaires);
-        //   return view('admin.user.show')->with(compact('users','roles'));
-      
-        // }
+    //        $etapes=Etape::all();
+    //        $activites = Activite::findOrFail($id);
+           
+    //        if ($activites) {
+    //            // Supprimer l'activité
+    //            $activites->delete();
+    //            return redirect()->route('list_activite')->with('success', 'Activité supprimer avec succes'); 
+    //        }
+    //    }
 
 
 }

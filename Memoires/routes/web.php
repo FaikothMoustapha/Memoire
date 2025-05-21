@@ -85,7 +85,7 @@ Route::group(['middleware' => 'directeur'], function()
         Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
         Route::get('/notification/lire/{id}', [NotificationController::class, 'markAsRead'])->name('marquer_lecture');
         Route::delete('/notification/{id}', [NotificationController::class, 'delete'])->name('notification_delete');
-
+        Route::get('/notifications/marquer-tout-lu', [NotificationController::class, 'markAllAsRead'])->name('notification_all_read');
     });
 
 
@@ -99,6 +99,7 @@ Route::group(['middleware' => 'chefprojet'], function()
         Route::post('update/activite/{id}', [ActiviteController::class, 'update'])->name('update_activite');
         Route::delete('delete/activite/{id}', [ActiviteController::class, 'delete'])->name('delete_activite');
         Route::get('/projets/chef/{id}', [ProjetController::class, 'projetsParChef'])->name('projets_parchef');
+        
 
     });
 

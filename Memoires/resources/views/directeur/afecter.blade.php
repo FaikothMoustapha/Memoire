@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="text-primary">📝 Affectation dun projet</h2>
+        <h2 class="text-primary">📝 Affectation d'un projet</h2>
         <a href="{{ route('list_projet_n_affect') }}" class="btn btn-secondary">
             🔙 Retour à la liste
         </a>
@@ -22,31 +22,33 @@
                 @csrf 
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label  class="form-label">Code du projet</label>
+                        <label class="form-label">Code du projet</label>
                         <input type="text" class="form-control" name="code" value="{{ $projets->code }}" required>
                         <small class="text-danger">{{ $errors->first('code') }}</small>
                     </div>
                     <div class="col-md-6">
-                        <label for="" class="form-label">Libellé</label>
-                        <input type="text" class="form-control" name="libProj" value="{{ $projets->libProj }}" >
+                        <label class="form-label">Libellé</label>
+                        <input type="text" class="form-control" name="libProj" value="{{ $projets->libProj }}">
                         <small class="text-danger">{{ $errors->first('libProj') }}</small>
                     </div>
                 </div>
-                </div class="row mb-3">
+
+                <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="" class="form-label">Objectifs</label>
-                        <input type="text" class="form-control" name="objectifs" value="{{ $projets->objectifs }}" >
+                        <label class="form-label">Objectifs</label>
+                        <input type="text" class="form-control" name="objectifs" value="{{ $projets->objectifs }}">
                         <small class="text-danger">{{ $errors->first('objectifs') }}</small>
                     </div>
                     <div class="col-md-6">
-                        <label for="etape_id" class="form-label">chef de projets</label>
-                        <select class="form-select" name="chef_projet_id" required>
+                        <label class="form-label">Chef de projet</label>
+                       <select class="form-select" name="chef_projet_id" required>
                             @foreach ($users as $user)
                                 <option value="{{ $user->id }}" {{ $projets->chef_projet_id == $user->id ? 'selected' : '' }}>
-                                    {{ $user->nom }} {{ $user->prenom }}
+                                    {{ $user->nom }} {{ $user->prenom }} ({{ $user->role->libRole }})
                                 </option>
                             @endforeach
                         </select>
+                        <small class="text-danger">{{ $errors->first('chef_projet_id') }}</small>
                     </div>
                 </div>
 
@@ -62,5 +64,3 @@
 </div>
 
 @endsection
-
-

@@ -128,8 +128,15 @@
                     </div>
 
                     <div class="nav-item">
-                        <a href="#">
-                            <i class="ik ik-bell"></i><span>Notifications</span>
+                        <a href="{{ route('notifications') }}">
+                            <i class="ik ik-bell"></i>
+                            <span>Notifications</span>
+                            @php
+                                $unreadCount = auth()->user()->unreadNotifications->count();
+                            @endphp
+                            @if ($unreadCount > 0)
+                                <span class="badge badge-danger">{{ $unreadCount }}</span>
+                            @endif
                         </a>
                     </div> 
                 </nav>

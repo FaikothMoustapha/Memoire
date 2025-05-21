@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use App\Models\Projet;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -19,12 +18,17 @@ class NouveauProjetCree extends Notification
         $this->projets = $projets;
     }
 
+    /**
+     * Détermine les canaux de notification : email + base de données.
+     */
     public function via($notifiable)
     {
         return ['mail', 'database'];
     }
 
-
+    /**
+     * Contenu de l’email envoyé.
+     */
     public function toMail($notifiable)
     {
         return (new MailMessage)
@@ -32,26 +36,17 @@ class NouveauProjetCree extends Notification
             ->greeting('Bonjour DSI,')
             ->line('Un nouveau projet a été ajouté : ' . $this->projets->libProj)
             ->line('Merci de le prendre en compte rapidement.');
-            dd($this->projets);
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
-     * @return array<int, string>
+     * Contenu stocké dans la base de données (table `notifications`).
      */
-    /**
-     * Get the mail representation of the notification.
-     */
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(object $notifiable): array
+    public function toArray($notifiable): array
     {
         return [
-            //
+            'message' => 'Un nouveau projet a été créé : ' . $this->projets->libProj,
+            'projet_id' => $this->projets->id,
+            'created_at' => now()->toDateTimeString(),
         ];
     }
 }

@@ -44,7 +44,7 @@ class ResponsableController extends Controller
             //  dd($request->all());
             
             $request->validate([
-                'code' => 'required|string|mi-n:3',
+                'code' => 'required|string|min:3',
                 'libProj' => 'required|string|min:3',
                'objectifs' =>'required|string|min:10',
                'resAttendu' => 'required|string|min:10',

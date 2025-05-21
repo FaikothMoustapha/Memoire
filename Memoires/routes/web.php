@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChefProjetController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DirecteurController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PrestataireController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\ResponsableController;
@@ -81,6 +82,10 @@ Route::group(['middleware' => 'directeur'], function()
         Route::get('list/projet/n/affecter',[DirecteurController::class,'list'])->name('list_projet_n_affect');
         Route::post('update/projet/n/affecter{id}', [DirecteurController::class, 'update'])->name('update_projet_n_affect');
         Route::get('affecter/projet/{id}',[DirecteurController::class,'affecter'])->name('affecter_projet');
+        Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+        Route::get('/notification/lire/{id}', [NotificationController::class, 'markAsRead'])->name('marquer_lecture');
+        Route::delete('/notification/{id}', [NotificationController::class, 'delete'])->name('notification_delete');
+
     });
 
 

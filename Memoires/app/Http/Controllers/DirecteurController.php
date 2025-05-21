@@ -24,12 +24,13 @@ class DirecteurController extends Controller
 
     public function update(Request $request,$id)
         {
-            // $request->validate([
-            //     'nom' => 'required|string|min:3',
-            //     'prenom' => 'required|string|min:3',
-            //     'telephone' => 'required|string|min:10',
-            //     'password' => 'required|string|min:4',
-            // ]);
+            $request->validate([
+                'code' => 'required|string|min:3',
+                'libProj' => 'required|string|min:3',
+                'objectifs' => 'required|string|min:10',
+                'chef_projet_id' => 'required|exists:users,id',
+            ]);
+
             $projets=Projet::findOrFail($id);
         //    dd($request->id);
             $projets->code=$request->code;
@@ -37,19 +38,20 @@ class DirecteurController extends Controller
             $projets->objectifs=$request->objectifs;           
             $projets->chef_projet_id=$request->chef_projet_id;       
             $projets->save();
-           return redirect()->route('list_projet_n_affect')->with('success', 'Projet affecter avec succès');  
+           return redirect()->route('list_projet_n_affect')->with('success', 'Projet affecté avec succès');  
         }
 
         public function affecter($id)
         {
             // c'est pour recuper les
-            // dd($id);
+            $users = User::whereHas('role', function ($query) {
+            $query->whereIn('libRole', ['ChefProjet', 'Responsable']);
+        })->get();
             $categories = Categorie::all();
             $prestataires = Prestataire::all();
             $programmes = Programme::all();
             $financements = Financement::all();
             $statuts = StatutProjet::all();
-            $users = User::all();
             $structures = Structure::all();
             $projets=Projet::findOrFail($id);
             

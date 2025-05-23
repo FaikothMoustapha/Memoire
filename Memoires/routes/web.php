@@ -99,7 +99,12 @@ Route::group(['middleware' => 'chefprojet'], function()
         Route::post('update/activite/{id}', [ActiviteController::class, 'update'])->name('update_activite');
         Route::delete('delete/activite/{id}', [ActiviteController::class, 'delete'])->name('delete_activite');
         Route::get('/projets/chef/{id}', [ProjetController::class, 'projetsParChef'])->name('projets_parchef');
-        
+        Route::get('/etape/proj/{id}', [ChefProjetController::class, 'etapeProj'])->name('etape_proj');
+        Route::get('/act/proj', [ChefProjetController::class, 'actProj'])->name('act_proj');
+        Route::get('showp/projet/{id}', [ChefProjetController::class, 'showp'])->name('showp_projet');
+        Route::get('addd/{id}',[ChefProjetController::class,'addd'])->name('addd');
+        Route::post('updat/{id}', [ChefProjetController::class, 'updat'])->name('updat');
+        Route::get('/projets/{projet}/etapes', [ChefProjetController::class, 'getEtapes'])->name('projets_etapes');
 
     });
 

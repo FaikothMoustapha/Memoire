@@ -29,7 +29,7 @@
                         <a href="{{ asset('storage/' . $doc->chemin) }}" target="_blank" class="btn btn-primary">
                             Voir
                         </a>
-                            <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownDownload{{ $doc->id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="btn" style="background-color:#2E7D32; color:white;" href="#" role="button" id="dropdownDownload{{ $doc->id }}" data-bs-toggle="dropdown" aria-expanded="false">
                                 Télécharger
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownDownload{{ $doc->id }}">

@@ -191,7 +191,7 @@
                         </a>
                         <div class="submenu-content">
                             <a href="{{route('documents_list')}}" class="menu-item"><i class="fas fa-file-alt"></i>Documents</a>
-                            <a href="#" class="menu-item"><i class="fas fa-handshake"></i>Reunions</a>
+                            <a href="{{route('reunions_list')}}" class="menu-item"><i class="fas fa-handshake"></i>Reunions</a>
                             <a href="#" class="menu-item"><i class="fas fa-comments"></i>Commentaires </a>
                         </div>
                     </div>

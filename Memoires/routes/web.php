@@ -73,6 +73,13 @@ Route::group(['middleware' => 'responsable'], function()
         Route::get('show/projet/{id}', [ResponsableController::class, 'show'])->name('show_projet');
         Route::delete('projet/delete/{id}', [ResponsableController::class, 'delete'])->name('delete_projet');
         Route::get('/structures/{programme_id}', [ResponsableController::class, 'getStructuresByProgramme']);
+        Route::get('/projets/responsable', [ResponsableController::class, 'mesProjets'])->name('projets_paresponsable');
+        Route::get('/notifications/Responsable', [NotificationController::class, 'resp'])->name('notifications_responsable');
+        Route::get('/notification/lire/{id}', [NotificationController::class, 'markAsRead'])->name('marquer_lecture');
+        Route::delete('/notification/{id}', [NotificationController::class, 'delete'])->name('notification_delete');
+        Route::get('/notifications/marquer-tout-lu', [NotificationController::class, 'markAllAsRead'])->name('notification_all_read_resp');
+        Route::get('list/projet/n/affecter',[DirecteurController::class,'list'])->name('list_projet_n_affect_resp');
+
 
     });
 
@@ -82,10 +89,10 @@ Route::group(['middleware' => 'directeur'], function()
         Route::get('list/projet/n/affecter',[DirecteurController::class,'list'])->name('list_projet_n_affect');
         Route::post('update/projet/n/affecter{id}', [DirecteurController::class, 'update'])->name('update_projet_n_affect');
         Route::get('affecter/projet/{id}',[DirecteurController::class,'affecter'])->name('affecter_projet');
-        Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+        Route::get('/notifications/Directeur', [NotificationController::class, 'index'])->name('notifications_directeur');
         Route::get('/notification/lire/{id}', [NotificationController::class, 'markAsRead'])->name('marquer_lecture');
         Route::delete('/notification/{id}', [NotificationController::class, 'delete'])->name('notification_delete');
-        Route::get('/notifications/marquer-tout-lu', [NotificationController::class, 'markAllAsRead'])->name('notification_all_read');
+        Route::get('/notifications/marquer-tout-lu', [NotificationController::class, 'markAllAsRead'])->name('notification_all_read_dir');
     });
 
 
@@ -98,7 +105,11 @@ Route::group(['middleware' => 'chefprojet'], function()
         Route::get('edit/activite/{id}',[ActiviteController::class,'edit'])->name('edit_activite');
         Route::post('update/activite/{id}', [ActiviteController::class, 'update'])->name('update_activite');
         Route::delete('delete/activite/{id}', [ActiviteController::class, 'delete'])->name('delete_activite');
-        Route::get('/projets/chef/{id}', [ProjetController::class, 'projetsParChef'])->name('projets_parchef');
+        Route::get('/projets/chef/{id}', [ChefProjetController::class, 'projetsParChef'])->name('projets_parchef');
+        Route::get('/notifications/Chef', [NotificationController::class, 'chef'])->name('notifications_chef');
+        Route::get('/notification/lire/{id}', [NotificationController::class, 'markAsRead'])->name('marquer_lecture');
+        Route::delete('/notification/{id}', [NotificationController::class, 'delete'])->name('notification_delete');
+        Route::get('/notifications/marquer-tout-lu', [NotificationController::class, 'markAllAsRead'])->name('notification_all_read_chef');
         
 
     });

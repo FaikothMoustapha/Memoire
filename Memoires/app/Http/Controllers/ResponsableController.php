@@ -10,6 +10,7 @@ use App\Models\Projet;
 use App\Models\StatutProjet;
 use App\Models\Structure;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Notifications\NouveauProjetCree;
 use Illuminate\Http\Request;
 
@@ -151,6 +152,16 @@ class ResponsableController extends Controller
     //            return redirect()->route('list_activite')->with('success', 'Activité supprimer avec succes'); 
     //        }
     //    }
+public function mesProjets()
+{
+    $responsable = Auth::user();
+    $projets = Projet::where('responsable_id', $responsable->id)->get();
 
-
+    return view('responsable.mes_projets', compact('projets', 'responsable'));
 }
+
+
+        }
+
+
+

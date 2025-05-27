@@ -32,6 +32,10 @@ return new class extends Migration
             ->nullable() // L'ordre est important, nullable() doit être avant constrained()
             ->constrained('users')
             ->onDelete('set null');
+            $table->foreignId('responsable_id')
+            ->nullable() // L'ordre est important, nullable() doit être avant constrained()
+            ->constrained('users')
+            ->onDelete('set null');
             $table->timestamps();
         });
     }

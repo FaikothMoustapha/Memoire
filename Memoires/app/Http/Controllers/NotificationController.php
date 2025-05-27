@@ -11,6 +11,16 @@ class NotificationController extends Controller
         $notifications = Auth::user()->notifications;
         return view('directeur.notification.projet_creer', compact('notifications'));
     }
+    public function resp()
+    {
+        $notifications = Auth::user()->notifications;
+        return view('responsable.notification.projet_affecter', compact('notifications'));
+    }
+    public function chef()
+    {
+        $notifications = Auth::user()->notifications;
+        return view('chefProjet.notification.projet_affecter', compact('notifications'));
+    }
     public function markAllAsRead()
     {
         $user = Auth::user();

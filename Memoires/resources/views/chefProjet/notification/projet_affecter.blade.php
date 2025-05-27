@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>🔔 Notifications reçues</h3>
         @if(auth()->user()->unreadNotifications->count() > 0)
-            <a href="{{ route('notification_all_read') }}" class="btn btn-sm btn-success">
+            <a href="{{ route('notification_all_read_chef') }}" class="btn btn-sm btn-success">
                 ✅ Tout marquer comme lues
             </a>
         @endif
@@ -32,9 +32,9 @@
                 </div>
                 <div class="d-flex align-items-center">
                     @if(isset($notification->data['projet_id']))
-                        <a href="{{ route('affecter_projet', $notification->data['projet_id']) }}" class="btn btn-sm btn-outline-primary me-2" title="Affecter">
+                        {{-- <a href="{{ route('affecter_projet', $notification->data['projet_id']) }}" class="btn btn-sm btn-outline-primary me-2" title="Affecter">
                             ⚙️
-                        </a>
+                        </a> --}}
                         <a href="{{ route('edit_projet', $notification->data['projet_id']) }}" class="btn btn-sm btn-outline-secondary me-2" title="Détails">
                             📄
                         </a>

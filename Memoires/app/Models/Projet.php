@@ -23,6 +23,7 @@ class Projet extends Model
         'PTF',
         'statuts_projet_id',
         'chef_projet_id',
+        'responsable_id'
     ];
     public function categorie()
         {
@@ -64,6 +65,10 @@ class Projet extends Model
             return $this->belongsTo(User::class,'chef_projet_id');
         }
 
+    public function responsable()
+        {
+            return $this->belongsTo(User::class, 'responsable_id');
+        }
 
 
 }

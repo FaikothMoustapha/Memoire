@@ -157,7 +157,7 @@
                     <div class="nav-lavel">Chef de projets</div>
 
                     <div class="nav-item active">
-                        <a href="{{route('index')}}">
+                        <a href="{{route('chefProjet_dashboard')}}">
                             <i class="ik ik-bar-chart-2"></i><span>Tableau de bord</span>
                         </a>
                     </div> 
@@ -185,12 +185,17 @@
                             <i class="ik ik-file-text"></i><span>Rapports d'avancement</span>
                         </a>
                     </div>
-
-                    <div class="nav-item">
+                    <div class="nav-item has-sub">
                         <a href="#">
                             <i class="ik ik-paperclip"></i><span>Commentaires et pièces jointes</span>
                         </a>
+                        <div class="submenu-content">
+                            <a href="{{route('documents_list')}}" class="menu-item"><i class="fas fa-file-alt"></i>Documents</a>
+                            <a href="#" class="menu-item"><i class="fas fa-handshake"></i>Reunions</a>
+                            <a href="#" class="menu-item"><i class="fas fa-comments"></i>Commentaires </a>
+                        </div>
                     </div>
+                    
 
                     <div class="nav-item">
                         <li class="nav-item">

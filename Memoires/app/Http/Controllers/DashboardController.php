@@ -32,12 +32,6 @@ class DashboardController extends Controller
         }
         else if (Auth::user()->role->libRole == 'ChefProjet') 
         {
-            return view('chefProjet/dashboard');
-        }
-    }
-    
-    public function index()
-    {
         // Statuts des projets
         $statuts = ['Nouveau', 'En cours', 'Terminé', 'Abandonné'];
         $projets = [];
@@ -49,6 +43,9 @@ class DashboardController extends Controller
         $reunions = Reunion::orderBy('dateReunion','asc','heure','asc')->get();
 
         return view('chefProjet.dashboard', compact('projets', 'reunions'));
+            return view('chefProjet/dashboard');
+        }
     }
+        
 
 }

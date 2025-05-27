@@ -5,11 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Activite;
 use App\Models\Categorie;
 use App\Models\Etape;
-<<<<<<< HEAD
-use App\Models\Projet;
-use App\Models\User;
-
-=======
 use App\Models\Financement;
 use App\Models\Prestataire;
 use App\Models\Programme;
@@ -17,12 +12,10 @@ use App\Models\Projet;
 use App\Models\StatutProjet;
 use App\Models\Structure;
 use App\Models\User;
->>>>>>> 3ef1d2ab5ea4af1085e3b879b38b5c45fb88ad0e
 use Illuminate\Http\Request;
 
 class ChefProjetController extends Controller
 {
-<<<<<<< HEAD
     public function projetsParChef($id)
         {
             // On récupère tous les projets affectés à ce chef
@@ -34,7 +27,7 @@ class ChefProjetController extends Controller
             return view('chefProjet.mes_projets', compact('projets', 'chef'));
         }
 
-=======
+
     public function etapeProj($id)
         {
             // c'est pour recuper les
@@ -110,10 +103,13 @@ class ChefProjetController extends Controller
         }
         public function getEtapes(Projet $projet)
         {
-            $etapes = $projet->categorie->etapes;
-            return view('chefProjet.projet.etape')-> with(compact('projet', 'etapes'));
+            $categorie = $projet->categorie;
+        
+            $etapes = $categorie ? $categorie->etapes()->with('activites')->get() : collect();
+        
+            return view('chefProjet.projet.etape', compact('projet', 'etapes'));
         }
->>>>>>> 3ef1d2ab5ea4af1085e3b879b38b5c45fb88ad0e
+        
 
 
 }

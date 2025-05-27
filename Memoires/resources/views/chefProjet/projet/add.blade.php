@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card shadow rounded-2">
         <div class="card-body p-5">
-            <h2 class="mb-4 text-center text-primary">📝 Ajout des information du projets Projet</h2>
+            <h2 class="mb-4 text-center text-primary">📝 Ajout des informations liées a lactivites</h2>
             <div >
                 @include('alerte.alerte')
             </div>
@@ -14,29 +14,26 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label  class="form-label">Date de début</label>
-                        <input type="date" class="form-control rounded-2" name="dateDebut" id="dateDebut" required>
-                        <div style="color: red">{{$errors->first('dateDebut')}}</div>
+                        <input type="date" class="form-control rounded-2" name="datePrev" id="datePrev" required>
+                        <div style="color: red">{{$errors->first('datePrev')}}</div>
                     </div>
                     <div class="col-md-6">
-                        <label for="libProj" class="form-label">Libellé</label>
-                        <input type="date" class="form-control rounded-2" name="dateFin" id="dateFin" required>
-                        <div style="color: red">{{$errors->first('dateFin')}}</div>
+                        <label class="form-label">Date de fin</label>
+                        <input type="date" class="form-control rounded-2" name="dateFinAct" id="dateFinAct" required>
+                        <div style="color: red">{{$errors->first('dateFinAct')}}</div>
 
                     </div>
                 </div>
                 <div class="row mb-3">
+                    
                     <div class="col-md-6">
-                        <label  class="form-label">Durer en jours</label>
-                        <input type="number" class="form-control rounded-2" name="duree" id="duree" required>
-                        <div style="color: red">{{$errors->first('duree')}}</div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="statuts_projet_id" class="form-label">Statut du projet</label>
-                        <select class="form-control rounded-2 " name="statuts_projet_id" id="statuts_projet_id">
-                            @foreach ($statuts as $statut)
-                                <option value="{{ $statut->id }}">{{ $statut->libStatut }}</option>
-                            @endforeach
+                        <label for="statuts_projet_id" class="form-label">Statut de l'activite</label>
+                        <select class="form-control rounded-2 " name="statut" id="statut">
+                            <option value="">Début</option>
+                            <option value="">En cours</option>
+                            <option value="">Terminé</option>
                         </select>
+                        
                     </div>
                 </div>
                 <div class="mb-4 text-center text-primary">

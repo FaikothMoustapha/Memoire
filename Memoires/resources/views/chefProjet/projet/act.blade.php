@@ -24,16 +24,20 @@ libEtape
                                 <table id="userTable" class="table table-hover mb-0">
                                     <thead class="table-primary">
                                         <tr>
-                                            <th>Etapes</th>
+                                            <th>Activite</th>
                                             <th>Statut</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody >
                                         @foreach ($activites as $activite)
                                             <tr>
                                                 <td>{{$activite->libAct}}</td>
+                                                <td>{{$activite->statut}}</td>
                                                 <td>
-                                                    <a href="" class="btn btn-sm btn-primary float-right">Infos</a>
+                                                    <a href="{{ route('addd', $activite->id) }}" class="btn btn-primary">
+                                                        Ajouter
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach

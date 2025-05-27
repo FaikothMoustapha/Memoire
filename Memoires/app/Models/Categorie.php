@@ -10,4 +10,10 @@ class Categorie extends Model
         'libCat',
         'desCat',
     ];
+
+    public function etapes()
+        {
+            return $this->hasMany(Etape::class);
+        }
+
 }

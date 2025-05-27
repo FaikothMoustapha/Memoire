@@ -1,77 +1,56 @@
-libEtape
 @extends('layouts.master')
+
 @section('content')
-<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-    <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0"><strong>Etaapes</strong></h5>
+<div class="container mt-5">
+    <h3 class="mb-4 text-center" >
+        Étapes de la catégorie 
+        <span class="badge bg-primary">{{ $projet->categorie->libelle }}</span>
+        pour le projet 
+        <span class="badge bg-success">{{ $projet->libProj }}</span>
+
+        <div class="mt-5 text-center">
+            <a href="{{ route('projets_parchef', ['id' => Auth::user()->id]) }}" class="btn btn-outline-secondary">
+                ← Retour à mes projets
+            </a>
         </div>
-            <div  class="card-header" style="display: flex ">
-                <h5 class=" col-lg-11"></h5>
-                <a href="{{route('add_activite')}}"><button type="submit" class="btn btn-primary rounded-2" >➕Ajouter</button></a>
-            </div>
-            <div >
-                @include('alerte.alerte')
-            </div>
-                <div class="card-body p-0">
-                    <div class="row mb-3 justify-content-center">
-                        <div class="col-md-6">
-                            <input type="text" id="searchInput" class="form-control text-center" placeholder="🔍 Rechercher une activites...">
-                            <h2>Étapes du projet : {{ $projet->libProj }}</h2>
+    </h3>
+
+    @if($etapes->isNotEmpty())
+        <div class="row g-4">
+            @foreach($etapes as $etape)
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-primary">
+                        <div class="card-header bg-primary text-white fw-bold">
+                            {{ $etape->libEtape }}
+                        </div>
+                        <div class="card-body">
+                            
+                            @if($etape->activites->isNotEmpty())
+                                <h6 class="mt-3">Activités :</h6>
+                                <ul class="list-group list-group-flush rounded">
+                                    @foreach($etape->activites as $activite)
+                                        <li class="list-group-item">
+                                            <strong>{{ $activite->libAct }}</strong><br>
+                                            <small class="text-muted">{{ $activite->description }}</small>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <div class="alert alert-info mt-3 mb-0" role="alert">
+                                    Aucune activité définie pour cette étape.
+                                </div>
+                            @endif
                         </div>
                     </div>
-                    
-                            <div class="table-responsive">
-                                <table id="userTable" class="table table-hover mb-0">
-                                    <thead class="table-primary">
-                                        <tr>
-                                            <th>Etapes</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody >
-                                        <div class="container">
-                                            <tr>
-                                                <td>
-                                                    @if($etapes && $etapes->count())
-                                                        <ul>
-                                                            @foreach($etapes as $etape)
-                                                                <li>{{ $etape->libEtape }}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <a class="dropdown-item d-flex align-items-center" href="{{route('act_proj')}}">
-                                                        <button>
-                                                            <i class="fas fa-edit text-success me-2"></i> Activites associer
-                                                        </button>
-                                                    </a>
-                                                </td>
-                                            </tr> 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <script>
-                        document.getElementById('searchInput').addEventListener('keyup', function () {
-                            let filter = this.value.toLowerCase();
-                            let rows = document.querySelectorAll('#userTable tbody tr');
-                            rows.forEach(function (row) {
-                                let text = row.textContent.toLowerCase();
-                                row.style.display = text.includes(filter) ? '' : 'none';
-                            });
-                        });
-                    function confirmDelete(){
-                        if (confirm('voulez-vous vraiment supprimer cet stagiaire ?')) {
-                            document.getElementById('id').submit();
-                        }
-                    }
-                    </script>
-                    
                 </div>
+            @endforeach
         </div>
-    </div>
+    @else
+        <div class="alert alert-warning text-center" role="alert">
+            Aucune étape définie pour cette catégorie.
+        </div>
+    @endif
+
+    
 </div>
 @endsection

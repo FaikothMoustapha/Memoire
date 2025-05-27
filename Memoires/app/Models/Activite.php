@@ -15,6 +15,7 @@ class Activite extends Model
     ];
     public function etape()
         {
-            return $this->belongsTo(Etape::class,'etape_id');
+            return $this->belongsTo(Etape::class);
         }
+
 }

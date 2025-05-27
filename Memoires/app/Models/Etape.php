@@ -12,6 +12,10 @@ class Etape extends Model
         'categorie_id',
         
     ];
+    public function activites()
+    {
+        return $this->hasMany(\App\Models\Activite::class);
+    }
     
 
 }

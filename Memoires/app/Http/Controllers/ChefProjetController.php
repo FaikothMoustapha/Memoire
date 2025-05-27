@@ -87,14 +87,13 @@ class ChefProjetController extends Controller
             $projets->duree=$request->duree;
             $projets->statuts_projet_id=$request->statuts_projet_id;      
             $projets->save(); 
-           return redirect()->route('projets_parchef',$projets->id)->with('success', 'Projet modifier avec succès');  
+            return redirect()->route('chefProjet_dashboard')->with('success', 'Projet modifier avec succès');  
         }
         public function getEtapes(Projet $projet)
-{
-    $etapes = $projet->categorie->etapes;
-
-    return view('chefProjet.projet.etape', compact('projet', 'etapes'));
-}
+        {
+            $etapes = $projet->categorie->etapes;
+            return view('chefProjet.projet.etape')-> with(compact('projet', 'etapes'));
+        }
 
 
 }

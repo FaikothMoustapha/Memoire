@@ -147,7 +147,7 @@
                     <div class="nav-lavel">Chef de projets</div>
 
                     <div class="nav-item active">
-                        <a href="#">
+                        <a href="{{route('index')}}">
                             <i class="ik ik-bar-chart-2"></i><span>Tableau de bord</span>
                         </a>
                     </div> 

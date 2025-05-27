@@ -105,7 +105,7 @@ Route::group(['middleware' => 'chefprojet'], function()
         Route::get('addd/{id}',[ChefProjetController::class,'addd'])->name('addd');
         Route::post('updat/{id}', [ChefProjetController::class, 'updat'])->name('updat');
         Route::get('/projets/{projet}/etapes', [ChefProjetController::class, 'getEtapes'])->name('projets_etapes');
-
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
     });
 
     

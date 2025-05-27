@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Projet;
+use App\Models\Reunion;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -32,6 +34,21 @@ class DashboardController extends Controller
         {
             return view('chefProjet/dashboard');
         }
+    }
+    
+    public function index()
+    {
+        // Statuts des projets
+        $statuts = ['Nouveau', 'En cours', 'Terminé', 'Abandonné'];
+        $projets = [];
+        foreach ($statuts as $s) {
+            $projets[$s] = Projet::where('statuts_projet_id', $s)->count();
+        }
+
+        // Réunions
+        $reunions = Reunion::orderBy('dateReunion','asc','heure','asc')->get();
+
+        return view('chefProjet.dashboard', compact('projets', 'reunions'));
     }
 
 }

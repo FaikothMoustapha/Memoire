@@ -7,6 +7,10 @@
         <a href="{{ route('list_projet') }}" class="btn btn-secondary">
             🔙 Retour à la liste
         </a>
+
+        <div >
+            @include('alerte.alerte')
+        </div>
     </div>
 
     <div class="card shadow rounded-2">
@@ -18,7 +22,7 @@
             </div>
 
             <!-- Formulaire d'enregistrement -->
-            <form action="" method="POST">
+            <form action="{{route('updat',$projets->id)}}" method="POST">
                 @csrf 
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -133,38 +137,53 @@
                         <small class="text-danger">{{ $errors->first('PTF') }}</small>
                     </div>
                 </div> 
-
                 <div class="mb-4 text-center text-primary">
-                    <a class="dropdown-item d-flex align-items-center" href="{{route('addd',$projets->id)}}">
-                        
-                            💾 Completer le infos
-                       
-                    </a>
-                    
-                </div>  
+                    <h2>💾 Completez les infos </h2>
+                </div> 
                 
+                
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label  class="form-label">Date de début</label>
+                            <input type="date" class="form-control rounded-2" name="dateDebut" id="dateDebut" required>
+                            <div style="color: red">{{$errors->first('dateDebut')}}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="libProj" class="form-label">Date prévu pour la fin</label>
+                            <input type="date" class="form-control rounded-2" name="dateFin" id="dateFin" required>
+                            <div style="color: red">{{$errors->first('dateFin')}}</div>
+    
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label  class="form-label">Durer en jours</label>
+                            <input type="number" class="form-control rounded-2" name="duree" id="duree" required>
+                            <div style="color: red">{{$errors->first('duree')}}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="statuts_projet_id" class="form-label">Statut du projet</label>
+                            <select class="form-control rounded-2 " name="statuts_projet_id" id="statuts_projet_id">
+                                @foreach ($statuts as $statut)
+                                    <option value="{{ $statut->id }}">{{ $statut->libStatut }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-4 text-center text-primary">
+                            <button type="submit" class="btn btn-primary  rounded-2">
+                                💾 Ajouter 
+                            </button>
+                        </div>
+                    </div>          
             </form>
+
+            
         </div>
     </div>
 </div>
 
 <script>
-     // 🎯 Gestion du PTF selon le type de financement
-     document.getElementById('financement_id').addEventListener('change', function() {
-    const selectedText = this.options[this.selectedIndex].text.trim().toLowerCase();
-    const ptfContainer = document.getElementById('ptf_container');
-
-    if (selectedText.includes('don')) {
-        ptfContainer.style.display = 'block';
-    } else {
-        ptfContainer.style.display = 'none';
-        document.getElementById('PTF').value = ''; // On vide le champ
-    }
-});
-
-
-    // Cacher le champ PTF par défaut
-    document.getElementById('PTF').parentElement.style.display = 'none';
+     
 </script>
           
 

@@ -12,4 +12,18 @@ class Document extends Model
         'type_id',
         'projet_id',
     ];
+    
+    // Relation vers Typedoc
+    public function type()
+    {
+        return $this->belongsTo(Typedoc::class, 'type_id');
+    }
+
+    // Relation vers Projet
+    public function projet()
+    {
+        return $this->belongsTo(Projet::class, 'projet_id');
+    }
+
+
 }

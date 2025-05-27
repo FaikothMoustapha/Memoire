@@ -9,6 +9,7 @@ use App\Http\Controllers\PrestataireController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\ResponsableController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DocumentController;
 use App\Models\Prestataire;
 use Illuminate\Support\Facades\Route;
 
@@ -116,8 +117,17 @@ Route::group(['middleware' => 'chefprojet'], function()
         Route::get('addd/{id}',[ChefProjetController::class,'addd'])->name('addd');
         Route::post('updat/{id}', [ChefProjetController::class, 'updat'])->name('updat');
         Route::get('/projets/{projet}/etapes', [ChefProjetController::class, 'getEtapes'])->name('projets_etapes');
+<<<<<<< HEAD
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
     });
 
 
+=======
+        Route::get('/documents/add', [DocumentController::class, 'add'])->name('documents_add');
+        Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
+        Route::get('/documents/list', [DocumentController::class, 'list'])->name('documents_list');
+
+    });
+
+>>>>>>> 7c54e621c6523ad358b2fd7fe8abf3f2f93e326f
 

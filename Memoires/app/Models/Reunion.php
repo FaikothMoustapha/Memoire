@@ -14,4 +14,9 @@ class Reunion extends Model
         'lieu',
         'projet_id',
     ];
+    public function projet()
+    {
+        return $this->belongsTo(Projet::class, 'projet_id');
+    }
+
 }

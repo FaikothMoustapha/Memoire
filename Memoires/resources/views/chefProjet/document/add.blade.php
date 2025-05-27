@@ -2,11 +2,16 @@
 @section('content')
 
 <div class="container">
-    <h2>Ajouter un document</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="text-primary">📝 Ajout d'un document</h3>
+        <a href="{{route('documents_list')}}">
+            <button type="submit" class="btn btn-primary rounded-2">🔙 Retour a la liste</button>
+        </a>
+    </div>
     <div>
         @include('alerte.alerte')
     </div>
-    
+
     <form action="{{ route('documents.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 

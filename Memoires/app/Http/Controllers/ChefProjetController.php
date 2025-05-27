@@ -16,7 +16,10 @@ use Illuminate\Http\Request;
 
 class ChefProjetController extends Controller
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1b576f43ef8d1b966cdd41a524fe9239d62a54a8
     public function projetsParChef($id)
         {
             // On récupère tous les projets affectés à ce chef
@@ -27,8 +30,11 @@ class ChefProjetController extends Controller
 
             return view('chefProjet.mes_projets', compact('projets', 'chef'));
         }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 1b576f43ef8d1b966cdd41a524fe9239d62a54a8
     public function etapeProj($id)
         {
             // c'est pour recuper les
@@ -110,6 +116,10 @@ class ChefProjetController extends Controller
         
             return view('chefProjet.projet.etape', compact('projet', 'etapes'));
         }
+<<<<<<< HEAD
         
     }
 
+=======
+}
+>>>>>>> 1b576f43ef8d1b966cdd41a524fe9239d62a54a8

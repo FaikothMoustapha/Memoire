@@ -125,41 +125,44 @@
         </div>
 
         <!-- Timeline -->
-        <div class="card">
-            <h2>Réunions programmées</h2>
-            @foreach($reunions as $r)
-                <div class="timeline-item">
-                    <strong>{{ \Carbon\Carbon::parse($r->date_heure)->format('d M Y - H:i') }}</strong><br>
-                    <span>{{ $r->titre }}</span><br>
-                    <small>{{ $r->description }}</small>
+        <div class="col-md-6">
+        <div class="card" style="min-height: 422px;">
+            <div class="card-header">
+                <h3>Timeline</h3>
+                <div class="card-header-right">
+                    <ul class="list-unstyled card-option">
+                        <li><i class="ik ik-chevron-left action-toggle"></i></li>
+                        <li><i class="ik ik-minus minimize-card"></i></li>
+                        <li><i class="ik ik-x close-card"></i></li>
+                    </ul>
                 </div>
-            @endforeach
+            </div>
+            <div class="card-body timeline">
+                <div class="header bg-theme" style="background-image: url('img/placeholder/placeimg_400_200_nature.jpg')">
+                    <div class="color-overlay d-flex align-items-center">
+                        <div class="day-number">{{ \Carbon\Carbon::now()->day }}</div>
+                        <div class="date-right">
+                            <div class="day-name">{{ \Carbon\Carbon::now()->format('l') }}</div>
+                            <div class="month">{{ \Carbon\Carbon::now()->format('F Y') }}</div>
+                        </div>
+                    </div>                                
+                </div>
+                <ul>
+                    @foreach($reunions as $reunion)
+                        <li>
+                            <div class="bullet bg-green"></div> <!-- tu peux varier la couleur selon besoin -->
+                            <div class="time">{{ \Carbon\Carbon::parse($reunion->heure)->format('g A') }}</div>
+                            <div class="desc">
+                                <h3>{{ $reunion->odreJour }}</h3>
+                                <h4>{{ $reunion->lieu }} - {{ \Carbon\Carbon::parse($reunion->dateReunion)->format('d M Y') }}</h4>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
     </div>
 
-    <!-- Chart JS Script -->
-    <script>
-        const ctx = document.getElementById('projectChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: {!! json_encode(array_keys($projets)) !!},
-                datasets: [{
-                    label: 'Statut des projets',
-                    data: {!! json_encode(array_values($projets)) !!},
-                    backgroundColor: ['#36A2EB', '#FFCE56', '#4BC0C0', '#FF6384']
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }
-        });
-    </script>
 
     
 </div>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Projet;
 use App\Models\Reunion;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
 
 class DashboardController extends Controller
 {
@@ -32,17 +34,21 @@ class DashboardController extends Controller
         }
         else if (Auth::user()->role->libRole == 'ChefProjet') 
         {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1b576f43ef8d1b966cdd41a524fe9239d62a54a8
         $statuts = ['Nouveau', 'En cours', 'Terminé', 'Abandonné'];
         $projets = [];
         foreach ($statuts as $s) {
             $projets[$s] = Projet::where('statuts_projet_id', $s)->count();
         }
 
-        // Réunions
-        $reunions = Reunion::orderBy('dateReunion','asc','heure','asc')->get();
+    $reunions = Reunion::orderBy('dateReunion')->orderBy('heure')->get();
+    return view('chefProjet.dashboard', compact('reunions'));
 
         return view('chefProjet.dashboard', compact('projets', 'reunions'));
+<<<<<<< HEAD
 
 
             return view('chefProjet/dashboard');
@@ -53,3 +59,12 @@ class DashboardController extends Controller
 
         }
     
+=======
+            return view('chefProjet/dashboard');
+        }
+    }
+
+
+
+}
+>>>>>>> 1b576f43ef8d1b966cdd41a524fe9239d62a54a8

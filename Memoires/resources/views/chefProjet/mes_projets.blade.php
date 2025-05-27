@@ -9,7 +9,14 @@
                 @foreach($projets as $projet)
                     <li class="list-group-item">
                         {{ $projet->libProj }} 
-                        <a href="#" class="btn btn-sm btn-primary float-right">Voir</a>
+                        <div>
+                            <a href="{{route('showp_projet',$projet->id)}}" class="btn btn-sm btn-primary float-right">Voir</a>
+                        </div>
+                        <div>
+                            <a href="{{ route('projets_etapes', $projet->id) }}" class="btn btn-primary">
+                                Étapes associées
+                            </a>
+                        </div>
                     </li>
                 @endforeach
             </ul>

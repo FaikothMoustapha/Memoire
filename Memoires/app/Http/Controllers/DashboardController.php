@@ -32,11 +32,7 @@ class DashboardController extends Controller
         }
         else if (Auth::user()->role->libRole == 'ChefProjet') 
         {
-<<<<<<< HEAD
-            // Statuts des projets
-=======
-        // Statuts des projets
->>>>>>> 7c54e621c6523ad358b2fd7fe8abf3f2f93e326f
+
         $statuts = ['Nouveau', 'En cours', 'Terminé', 'Abandonné'];
         $projets = [];
         foreach ($statuts as $s) {
@@ -47,16 +43,13 @@ class DashboardController extends Controller
         $reunions = Reunion::orderBy('dateReunion','asc','heure','asc')->get();
 
         return view('chefProjet.dashboard', compact('projets', 'reunions'));
-<<<<<<< HEAD
-=======
+
+
             return view('chefProjet/dashboard');
         }
     }
         
->>>>>>> 7c54e621c6523ad358b2fd7fe8abf3f2f93e326f
+
 
         }
-    }
     
-    
-}

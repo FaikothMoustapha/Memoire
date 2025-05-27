@@ -87,4 +87,19 @@ class ActiviteController extends Controller
                return redirect()->route('list_activite')->with('success', 'Activité supprimer avec succes'); 
            }
        }
+
+       public function update_new(Request $request, Activite $activite)
+        {
+            $validated = $request->validate([
+                'date_debut' => 'nullable|date',
+                'date_fin' => 'nullable|date|after_or_equal:date_debut',
+                'statut' => 'required|string|in:non démarré,en cours,terminé',
+            ]);
+
+            $activite->update($validated);
+
+            return redirect()->back()->with('success', 'Activité mise à jour avec succès.');
+        }
+
+
 }

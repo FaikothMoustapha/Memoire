@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\GestActivite;
 use App\Models\Activite;
 use App\Models\Etape;
 use Illuminate\Http\Request;
@@ -88,17 +88,24 @@ class ActiviteController extends Controller
            }
        }
 
-       public function update_new(Request $request, Activite $activite)
+       public function update_new(Request $request)
         {
-            $validated = $request->validate([
-                'date_debut' => 'nullable|date',
-                'date_fin' => 'nullable|date|after_or_equal:date_debut',
-                'statut' => 'required|string|in:non démarré,en cours,terminé',
+            $request->validate([
+                'date_debut' => 'required|date',
+                'date_fin' => 'required|date',
+                'statut' => 'required|string',
+                'activite_id' => 'required|exists:activites,id',
             ]);
-
-            $activite->update($validated);
-
-            return redirect()->back()->with('success', 'Activité mise à jour avec succès.');
+    
+            GestActivite::create([
+                'dateDeb' => $request->date_debut,
+                'dateFAct' => $request->date_fin,
+                'statut' => $request->statut,
+                'activite_id' => $request->activite_id,
+                'projet_id' => $request->projet_id,  // Assure-toi que ce champ est passé correctement
+            ]);
+    
+            return redirect()->back()->with('success', 'Informations mises à jour avec succès!');
         }
 
 

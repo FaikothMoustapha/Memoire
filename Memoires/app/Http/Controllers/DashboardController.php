@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Projet;
 use App\Models\Reunion;
+use App\Models\StatutProjet;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -34,37 +35,42 @@ class DashboardController extends Controller
         }
         else if (Auth::user()->role->libRole == 'ChefProjet') 
         {
-<<<<<<< HEAD
+            $chefId = Auth::user()->id;
 
-=======
->>>>>>> 1b576f43ef8d1b966cdd41a524fe9239d62a54a8
-        $statuts = ['Nouveau', 'En cours', 'Terminé', 'Abandonné'];
-        $projets = [];
-        foreach ($statuts as $s) {
-            $projets[$s] = Projet::where('statuts_projet_id', $s)->count();
-        }
+            $statutTermineId = StatutProjet::where('libStatut', 'terminé')->value('id');
+            $statutEnCoursId = StatutProjet::where('libStatut', 'en cours')->value('id');
+            $statutNouveauId = StatutProjet::where('libStatut', 'nouveau')->value('id');
 
-    $reunions = Reunion::orderBy('dateReunion')->orderBy('heure')->get();
-    return view('chefProjet.dashboard', compact('reunions'));
+            $totalTermines = Projet::where('chef_projet_id', $chefId)->where('statuts_projet_id', $statutTermineId)->count();
+            $totalEnCours = Projet::where('chef_projet_id', $chefId)->where('statuts_projet_id', $statutEnCoursId)->count();
+            $totalNouveaux = Projet::where('chef_projet_id', $chefId)->where('statuts_projet_id', $statutNouveauId)->count();
 
-        return view('chefProjet.dashboard', compact('projets', 'reunions'));
-<<<<<<< HEAD
+            $totalAffectes = $totalTermines + $totalEnCours + $totalNouveaux;
 
+            $total = $totalAffectes ?: 1;
+            $pourcentageTermines = ($totalTermines / $total) * 100;
+            $pourcentageEnCours = ($totalEnCours / $total) * 100;
+            $pourcentageNouveaux = ($totalNouveaux / $total) * 100;
+            $reunions = Reunion::all();
 
-            return view('chefProjet/dashboard');
+    // Affiche toutes les réunions pour vérifier qu'elles sont bien récupérées
+            $reunions = $reunions->map(function($r) {
+                $title = $r->odreJour;
+                $start = $r->dateReunion . 'T' . \Carbon\Carbon::parse($r->heure)->format('H:i:s');
+                
+            });
+
+            return view('chefProjet.dashboard', compact('totalAffectes','totalTermines','totalEnCours','totalNouveaux',
+                'pourcentageTermines',
+                'pourcentageEnCours',
+                'pourcentageNouveaux',
+                'reunions'
+            ));
+            
         }
     }
-        
-
-
-        }
-    
-=======
-            return view('chefProjet/dashboard');
-        }
-    }
-
-
-
 }
->>>>>>> 1b576f43ef8d1b966cdd41a524fe9239d62a54a8
+
+    
+
+

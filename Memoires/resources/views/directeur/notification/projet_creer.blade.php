@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>🔔 Notifications reçues</h3>
         @if(auth()->user()->unreadNotifications->count() > 0)
-            <a href="{{ route('notification_all_read_dir') }}" class="btn btn-sm btn-success">
+            <a href="#" class="btn btn-sm btn-success">
                 ✅ Tout marquer comme lues
             </a>
         @endif

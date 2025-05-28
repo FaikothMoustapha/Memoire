@@ -1,8 +1,5 @@
-@php
-    use Carbon\Carbon;
-@endphp
-
 @extends('layouts.master')
+
 @section('content')
 <div class="container mt-5">
     <h3 class="mb-4 text-center">
@@ -11,7 +8,9 @@
         pour le projet 
         <span class="badge bg-success">{{ $projet->libProj }}</span>
     </h3>
-
+    <div>
+        @include('alerte.alerte')
+    </div>
     <div class="mb-5 text-center">
         <a href="{{ route('projets_parchef', ['id' => Auth::user()->id]) }}" class="btn btn-outline-secondary">
             ← Retour à mes projets
@@ -32,19 +31,18 @@
                                     <small class="text-muted">{{ $activite->description }}</small><br>
 
                                     <div class="mt-2">
-                                        @if($activite->statut)
+                                        @if($activite->gestActivite)
                                             <span class="badge bg-info me-2">
-                                                Statut : {{ ucfirst($activite->statut) }}
+                                                Statut : {{ ucfirst($activite->gestActivite->statut) }}
                                             </span>
-                                        @endif
-
-                                        @if($activite->datePrev || $activite->dateFinAct)
                                             <span class="badge bg-secondary">
                                                 Dates : 
-                                                Début {{ $activite->datePrev ? \Carbon\Carbon::parse($activite->datePrev)->format('d/m/Y') : '—' }}
+                                                Début {{ $activite->gestActivite->dateDeb ? \Carbon\Carbon::parse($activite->gestActivite->dateDeb)->format('d/m/Y') : '—' }}
                                                 |
-                                                Fin {{ $activite->dateFinAct ? \Carbon\Carbon::parse($activite->dateFinAct)->format('d/m/Y') : '—' }}
+                                                Fin {{ $activite->gestActivite->dateFAct ? \Carbon\Carbon::parse($activite->gestActivite->dateFAct)->format('d/m/Y') : '—' }}
                                             </span>
+                                        @else
+                                            <span class="badge bg-warning me-2">Pas renseigné</span>
                                         @endif
                                     </div>
                                 </div>
@@ -57,31 +55,30 @@
                             <!-- Modal -->
                             <div class="modal fade" id="modalActivite{{ $activite->id }}" tabindex="-1" aria-labelledby="modalLabel{{ $activite->id }}" aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <form method="POST" action="{{ route('activite.update', $activite->id) }}">
+                                    <form method="POST" action="{{ route('activite.update') }}">
                                         @csrf
-                                        @method('PUT')
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="modalLabel{{ $activite->id }}">
-                                                    Modifier l’activité : {{ $activite->libAct }}
+                                                    Renseigner l’activité : {{ $activite->libAct }}
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="mb-3">
                                                     <label for="date_debut{{ $activite->id }}" class="form-label">Date de début</label>
-                                                    <input type="date" class="form-control" name="date_debut" id="date_debut{{ $activite->id }}" value="{{ $activite->date_debut }}">
+                                                    <input type="date" class="form-control" name="date_debut" id="date_debut{{ $activite->id }}">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="date_fin{{ $activite->id }}" class="form-label">Date de fin</label>
-                                                    <input type="date" class="form-control" name="date_fin" id="date_fin{{ $activite->id }}" value="{{ $activite->date_fin }}">
+                                                    <input type="date" class="form-control" name="date_fin" id="date_fin{{ $activite->id }}">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="statut{{ $activite->id }}" class="form-label">Statut</label>
                                                     <select class="form-select" name="statut" id="statut{{ $activite->id }}">
-                                                        <option value="non démarré" {{ $activite->statut == 'non démarré' ? 'selected' : '' }}>Non démarré</option>
-                                                        <option value="en cours" {{ $activite->statut == 'en cours' ? 'selected' : '' }}>En cours</option>
-                                                        <option value="terminé" {{ $activite->statut == 'terminé' ? 'selected' : '' }}>Terminé</option>
+                                                        <option value="non démarré">Non démarré</option>
+                                                        <option value="en cours">En cours</option>
+                                                        <option value="terminé">Terminé</option>
                                                     </select>
                                                 </div>
                                             </div>

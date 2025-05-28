@@ -4,7 +4,7 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="text-primary">📝 Projet</h2>
-        <a href="{{ route('list_projet') }}" class="btn btn-secondary">
+        <a href="#" class="btn btn-secondary">
             🔙 Retour à la liste
         </a>
 
@@ -22,160 +22,162 @@
             </div>
 
             <!-- Formulaire d'enregistrement -->
-            <form action="{{route('updat',$projets->id)}}" method="POST">
-                @csrf 
+            <form action="{{ route('updat', $projets->id) }}" method="POST">
+            @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Code du projet</label>
                         <input type="text" class="form-control" name="code" value="{{ $projets->code }}" readonly>
-                        <small class="text-danger">{{ $errors->first('code') }}</small>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Libellé</label>
                         <input type="text" class="form-control" name="libProj" value="{{ $projets->libProj }}" readonly>
-                        <small class="text-danger">{{ $errors->first('libProj') }}</small>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Objectifs</label>
-                        <input type="text" class="form-control" name="objectifs" value="{{ $projets->objectifs }}" >
-                        <small class="text-danger">{{ $errors->first('objectifs') }}</small>
+                        <textarea class="form-control" name="objectifs" rows="4" readonly>{{ $projets->objectifs }}</textarea>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Résultats attendus</label>
-                        <input type="text" class="form-control" name="resAttendu" value="{{ $projets->resAttendu }}" >
-                        <small class="text-danger">{{ $errors->first('resAttendu') }}</small>
+                        <textarea class="form-control" name="resAttendu" rows="4" readonly>{{ $projets->resAttendu }}</textarea>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Catégorie</label>
-                        <select class="form-select" name="categorie_id" readonly>
+                        <select class="form-select" disabled>
                             @foreach ($categories as $categorie)
-                                <option value="{{ $categorie->id }}" {{ $projets->categorie_id == $categorie->id ? 'selected' : '' }} >
+                                <option value="{{ $categorie->id }}" {{ $projets->categorie_id == $categorie->id ? 'selected' : '' }}>
                                     {{ $categorie->libCat }}
                                 </option>
                             @endforeach
                         </select>
+                        <input type="hidden" name="categorie_id" value="{{ $projets->categorie_id }}">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Prestataire</label>
-                        <select class="form-select" name="prestataire_id" readonly>
+                        <select class="form-select" disabled>
                             @foreach ($prestataires as $prestataire)
-                                <option value="{{ $prestataire->id }}" {{ $projets->prestataire_id == $prestataire->id ? 'selected' : '' }} >
+                                <option value="{{ $prestataire->id }}" {{ $projets->prestataire_id == $prestataire->id ? 'selected' : '' }}>
                                     {{ $prestataire->nomStructure }}
                                 </option>
                             @endforeach
                         </select>
+                        <input type="hidden" name="prestataire_id" value="{{ $projets->prestataire_id }}">
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label class="form-label">Satut</label>
-                        <select class="form-select" name="statuts_projet_id" readonly>
+                        <label class="form-label">Statut</label>
+                        <select class="form-select" disabled>
                             @foreach ($statuts as $statut)
-                                <option value="{{ $statut->id }}" {{ $projets->statuts_projet_id == $statut->id ? 'selected' : '' }} >
+                                <option value="{{ $statut->id }}" {{ $projets->statuts_projet_id == $statut->id ? 'selected' : '' }}>
                                     {{ $statut->libStatut }}
                                 </option>
                             @endforeach
                         </select>
+                        <input type="hidden" name="statuts_projet_id" value="{{ $projets->statuts_projet_id }}">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Programme</label>
-                        <select class="form-select" name="programme_id" readonly>
+                        <select class="form-select" disabled>
                             @foreach ($programmes as $programme)
-                                <option value="{{ $programme->id }}" {{ $projets->programme_id == $programme->id ? 'selected' : '' }} >
+                                <option value="{{ $programme->id }}" {{ $projets->programme_id == $programme->id ? 'selected' : '' }}>
                                     {{ $programme->libProg }}
                                 </option>
                             @endforeach
                         </select>
+                        <input type="hidden" name="programme_id" value="{{ $projets->programme_id }}">
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label class="form-label">Stucture initiatrice</label>
-                        <select class="form-select" name="structure_initiatrice_id" readonly>
+                        <label class="form-label">Structure initiatrice</label>
+                        <select class="form-select" disabled>
                             @foreach ($structures as $structure)
-                                <option value="{{ $structure->id }}" {{ $projets->structure_initiatrice_id == $structure->id ? 'selected' : '' }} >
+                                <option value="{{ $structure->id }}" {{ $projets->structure_initiatrice_id == $structure->id ? 'selected' : '' }}>
                                     {{ $structure->code }}
                                 </option>
                             @endforeach
                         </select>
+                        <input type="hidden" name="structure_initiatrice_id" value="{{ $projets->structure_initiatrice_id }}">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Structure beneficiaire</label>
-                        <select class="form-select" name="structure_beneficiaire_id" readonly>
+                        <label class="form-label">Structure bénéficiaire</label>
+                        <select class="form-select" disabled>
                             @foreach ($structures as $structure)
-                                <option value="{{ $structure->id }}" {{ $projets->structure_beneficiaire_id == $structure->id ? 'selected' : '' }} >
+                                <option value="{{ $structure->id }}" {{ $projets->structure_beneficiaire_id == $structure->id ? 'selected' : '' }}>
                                     {{ $structure->code }}
                                 </option>
                             @endforeach
                         </select>
+                        <input type="hidden" name="structure_beneficiaire_id" value="{{ $projets->structure_beneficiaire_id }}">
                     </div>
                 </div>
-                
+
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="financement_id" class="form-label">Source de financement</label>
-                        <select class="form-control rounded-2" name="financement_id" id="financement_id">
+                        <select class="form-control rounded-2" disabled>
                             @foreach ($financements as $Financements)
-                                <option value="{{ $Financements->id }}" {{ $projets->financement_id == $Financements->id ? 'selected' : '' }} readonly>
+                                <option value="{{ $Financements->id }}" {{ $projets->financement_id == $Financements->id ? 'selected' : '' }}>
                                     {{ $Financements->libFinancement }}
                                 </option>
                             @endforeach
-                            
                         </select>
+                        <input type="hidden" name="financement_id" value="{{ $projets->financement_id }}">
                     </div>
-        
-                    <!-- PTF caché par défaut -->
-                    <div class="col-md-6" id="ptf_container" style="display: none;">
+
+                    <!-- PTF -->
+                    <div class="col-md-6">
                         <label for="PTF" class="form-label">Partenaire Technique et Financier (PTF)</label>
                         <input type="text" class="form-control" name="PTF" value="{{ $projets->PTF }}" readonly>
-                        <small class="text-danger">{{ $errors->first('PTF') }}</small>
                     </div>
-                </div> 
+                </div>
+
                 <div class="mb-4 text-center text-primary">
-                    <h2>💾 Completez les infos </h2>
-                </div> 
-                
-                
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label  class="form-label">Date de début</label>
-                            <input type="date" class="form-control rounded-2" name="dateDebut" id="dateDebut" required>
-                            <div style="color: red">{{$errors->first('dateDebut')}}</div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="libProj" class="form-label">Date prévu pour la fin</label>
-                            <input type="date" class="form-control rounded-2" name="dateFin" id="dateFin" required>
-                            <div style="color: red">{{$errors->first('dateFin')}}</div>
-    
-                        </div>
+                    <h2>📝 Complétez les infos</h2>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Date de début</label>
+                        <input type="date" class="form-control rounded-2" name="dateDebut" required>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label  class="form-label">Durer en jours</label>
-                            <input type="number" class="form-control rounded-2" name="duree" id="duree" required>
-                            <div style="color: red">{{$errors->first('duree')}}</div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="statuts_projet_id" class="form-label">Statut du projet</label>
-                            <select class="form-control rounded-2 " name="statuts_projet_id" id="statuts_projet_id">
-                                @foreach ($statuts as $statut)
-                                    <option value="{{ $statut->id }}">{{ $statut->libStatut }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-4 text-center text-primary">
-                            <button type="submit" class="btn btn-primary  rounded-2">
-                                💾 Ajouter 
-                            </button>
-                        </div>
-                    </div>          
+                    <div class="col-md-6">
+                        <label class="form-label">Date prévue pour la fin</label>
+                        <input type="date" class="form-control rounded-2" name="dateFin" required>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Durée en jours</label>
+                        <input type="number" class="form-control rounded-2" name="duree" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Statut du projet</label>
+                        <select class="form-control rounded-2" name="statuts_projet_id">
+                            @foreach ($statuts as $statut)
+                                <option value="{{ $statut->id }}">{{ $statut->libStatut }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-4 text-center text-primary">
+                    <button type="submit" class="btn btn-primary rounded-2">
+                        💾 Ajouter
+                    </button>
+                </div>
             </form>
+
 
             
         </div>

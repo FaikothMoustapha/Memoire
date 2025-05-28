@@ -34,37 +34,20 @@ class DashboardController extends Controller
         }
         else if (Auth::user()->role->libRole == 'ChefProjet') 
         {
-<<<<<<< HEAD
-
-=======
->>>>>>> 1b576f43ef8d1b966cdd41a524fe9239d62a54a8
-        $statuts = ['Nouveau', 'En cours', 'Terminé', 'Abandonné'];
-        $projets = [];
-        foreach ($statuts as $s) {
+            $statuts = ['Nouveau', 'En cours', 'Terminé', 'Abandonné'];
+            $projets = [];
+            foreach ($statuts as $s) {
             $projets[$s] = Projet::where('statuts_projet_id', $s)->count();
-        }
+            }
 
-    $reunions = Reunion::orderBy('dateReunion')->orderBy('heure')->get();
-    return view('chefProjet.dashboard', compact('reunions'));
+            $reunions = Reunion::orderBy('dateReunion')->orderBy('heure')->get();
+            return view('chefProjet.dashboard', compact('reunions'));
 
-        return view('chefProjet.dashboard', compact('projets', 'reunions'));
-<<<<<<< HEAD
-
-
-            return view('chefProjet/dashboard');
+                return view('chefProjet.dashboard', compact('projets', 'reunions'));
+        
         }
     }
         
 
 
-        }
-    
-=======
-            return view('chefProjet/dashboard');
-        }
-    }
-
-
-
 }
->>>>>>> 1b576f43ef8d1b966cdd41a524fe9239d62a54a8

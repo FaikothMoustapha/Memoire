@@ -119,7 +119,7 @@ Route::group(['middleware' => 'chefprojet'], function()
         Route::post('updat/{id}', [ChefProjetController::class, 'updat'])->name('updat');
         Route::get('/projets/{projet}/etapes', [ChefProjetController::class, 'getEtapes'])->name('projets_etapes');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
-        Route::put('/activites/{activite}', [ActiviteController::class, 'update_new'])->name('activite.update');
+        Route::post('/activites', [ActiviteController::class, 'update_new'])->name('activite.update');
         Route::get('/documents/add', [DocumentController::class, 'add'])->name('documents_add');
         Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
         Route::get('/documents/list', [DocumentController::class, 'list'])->name('documents_list');

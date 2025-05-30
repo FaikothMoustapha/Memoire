@@ -69,6 +69,10 @@ class Projet extends Model
         {
             return $this->belongsTo(User::class, 'responsable_id');
         }
+public function gestActivites()
+{
+    return $this->hasMany(GestActivite::class);
+}
 
 
 }

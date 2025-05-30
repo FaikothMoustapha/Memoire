@@ -17,5 +17,14 @@ class Activite extends Model
         {
             return $this->belongsTo(Etape::class);
         }
+   public function gestActivite()
+{
+    return $this->hasOne(GestActivite::class);
+}
+
+    public function gestActiviteForProjet($projetId)
+    {
+        return $this->hasOne(GestActivite::class)->where('projet_id', $projetId);
+    }
 
 }

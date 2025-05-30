@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\GestActivite;
 use App\Models\Activite;
 use App\Models\Etape;
 use Illuminate\Http\Request;
@@ -88,18 +88,41 @@ class ActiviteController extends Controller
            }
        }
 
-       public function update_new(Request $request, Activite $activite)
-        {
-            $validated = $request->validate([
-                'date_debut' => 'nullable|date',
-                'date_fin' => 'nullable|date|after_or_equal:date_debut',
-                'statut' => 'required|string|in:non démarré,en cours,terminé',
-            ]);
+       public function update_new(Request $request)
+{
+    $request->validate([
+        'date_debut' => 'required|date',
+        'date_fin' => 'required|date',
+        'statut' => 'required|string',
+        'activite_id' => 'required|exists:activites,id',
+        'projet_id' => 'required|exists:projets,id',
+    ]);
 
-            $activite->update($validated);
+    $gestActivite = GestActivite::where('activite_id', $request->activite_id)
+                                ->where('projet_id', $request->projet_id)
+                                ->first();
 
-            return redirect()->back()->with('success', 'Activité mise à jour avec succès.');
-        }
+    if ($gestActivite) {
+        // Mise à jour
+        $gestActivite->dateDeb = $request->date_debut;
+        $gestActivite->dateFAct = $request->date_fin;
+        $gestActivite->statut = $request->statut;
+        $gestActivite->save();
+    } else {
+        // Création
+        GestActivite::create([
+            'dateDeb' => $request->date_debut,
+            'dateFAct' => $request->date_fin,
+            'statut' => $request->statut,
+            'activite_id' => $request->activite_id,
+            'projet_id' => $request->projet_id,
+            'etape_id' => $request->etape_id, 
+        ]);
+    }
+
+    return redirect()->back()->with('success', 'Informations mises à jour avec succès!');
+}
+
 
 
 }

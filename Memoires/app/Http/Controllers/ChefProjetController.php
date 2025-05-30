@@ -10,12 +10,14 @@ use App\Models\Prestataire;
 use App\Models\Programme;
 use App\Models\Projet;
 use App\Models\StatutProjet;
+use App\Models\GestActivite;
 use App\Models\Structure;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class ChefProjetController extends Controller
 {
+
     public function projetsParChef($id)
         {
             // On récupère tous les projets affectés à ce chef
@@ -97,14 +99,29 @@ class ChefProjetController extends Controller
             $projets->duree=$request->duree;
             $projets->statuts_projet_id=$request->statuts_projet_id;      
             $projets->save(); 
-            return redirect()->route('chefProjet_dashboard')->with('success', 'Projet modifier avec succès');  
+            return redirect()->route('chefProjet_dashboard')->with('success', 'Les infos du projets on ete ajouter avec succès');  
         }
-        public function getEtapes(Projet $projet)
-        {
-            $categorie = $projet->categorie;
+       public function getEtapes(Projet $projet)
+            {
+                $categorie = $projet->categorie;
+                
+                if ($categorie) {
+                    // Charger les étapes et activités
+                    $etapes = $categorie->etapes()->with(['activites' => function($query) use ($projet) {
+                        // On charge aussi la relation gestActivite filtrée par projet_id
+                        $query->with(['gestActivite' => function($q) use ($projet) {
+                            $q->where('projet_id', $projet->id);
+                        }]);
+                    }])->get();
+                } else {
+                    $etapes = collect();
+                }
+
+                return view('chefProjet.projet.etape', compact('projet', 'etapes'));
+            }
+
+
+
         
-            $etapes = $categorie ? $categorie->etapes()->with('activites')->get() : collect();
-        
-            return view('chefProjet.projet.etape', compact('projet', 'etapes'));
-        }
+    
 }

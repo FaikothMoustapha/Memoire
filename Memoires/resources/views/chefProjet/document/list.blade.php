@@ -29,21 +29,22 @@
                         <a href="{{ asset('storage/' . $doc->chemin) }}" target="_blank" class="btn btn-primary">
                             Voir
                         </a>
-                            <a class="btn" style="background-color:#2E7D32; color:white;" href="#" role="button" id="dropdownDownload{{ $doc->id }}" data-bs-toggle="dropdown" aria-expanded="false">
-                                Télécharger
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownDownload{{ $doc->id }}">
-                                <li>
-                                    <a class="dropdown-item" href="{{ asset('storage/' . $doc->chemin) }}" download>
-                                        <i class="fas fa-file-pdf me-2"></i> PDF
-                                    </a>
-                                </li>
-                                <li>
-                                    <button class="dropdown-item" onclick="printDocument('{{ asset('storage/' . $doc->chemin) }}')">
-                                        <i class="fas fa-print me-2"></i> Imprimer
-                                    </button>
-                                </li>
-                            </ul>
+                        <a class="btn" style="background-color:#2E7D32; color:white;" href="#" role="button" id="dropdownDownload{{ $doc->id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                            Télécharger
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownDownload{{ $doc->id }}">
+                            <li>
+                                <a class="dropdown-item" href="{{ asset('storage/' . $doc->chemin) }}" download>
+                                    <i class="fas fa-download me-2"></i> Télécharger
+                                </a>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" onclick="printDocument('{{ asset('storage/' . $doc->chemin) }}')">
+                                    <i class="fas fa-print me-2"></i> Imprimer
+                                </button>
+                            </li>
+                        </ul>
+                        
                     </td>
 
                 </tr>

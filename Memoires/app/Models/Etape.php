@@ -16,6 +16,10 @@ class Etape extends Model
     {
         return $this->hasMany(\App\Models\Activite::class);
     }
-    
+   public function gestActivites()
+        {
+            return $this->hasMany(GestActivite::class);
+        }
+ 
 
 }
